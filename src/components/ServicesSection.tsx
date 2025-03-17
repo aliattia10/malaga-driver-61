@@ -6,33 +6,33 @@ import { cn } from '@/lib/utils';
 const services = [
   {
     icon: <Car className="h-10 w-10" />,
-    title: "Airport Transfers",
-    description: "Reliable pickup and drop-off services at Málaga Airport. We track your flight to ensure we're there when you arrive.",
+    title: "Airport Transfers Málaga",
+    description: "Professional driver services for reliable pickup and drop-off at Málaga Airport. We track your flight to ensure we're there when you arrive.",
   },
   {
     icon: <Calendar className="h-10 w-10" />,
-    title: "Day Trips",
-    description: "Explore Andalusia's beautiful cities and towns with a knowledgeable driver who knows the best routes and spots.",
+    title: "Private Day Trips",
+    description: "Hire a private driver for day trips across Andalusia with knowledgeable local drivers who know the best routes and hidden gems.",
   },
   {
     icon: <Globe className="h-10 w-10" />,
-    title: "Sightseeing Tours",
-    description: "Custom sightseeing tours around Málaga and Costa del Sol. Visit historical sites, beaches, and hidden gems.",
+    title: "Custom Sightseeing Tours",
+    description: "Book personalized sightseeing tours with a private driver around Málaga and Costa del Sol to visit historical sites and beaches.",
   },
   {
     icon: <UserCheck className="h-10 w-10" />,
-    title: "Corporate Services",
-    description: "Professional transportation for business meetings, conferences, and corporate events in the Málaga area.",
+    title: "Corporate Transportation",
+    description: "Professional driver services for business meetings, conferences, and corporate events throughout the Málaga region.",
   },
   {
     icon: <Clock className="h-10 w-10" />,
-    title: "Hourly Hire",
-    description: "Flexible hourly booking options for when you need a driver for a few hours or for the whole day.",
+    title: "Hourly Driver Hire",
+    description: "Flexible hourly booking options when you need to hire a private driver for a few hours or for the whole day in Málaga.",
   },
   {
     icon: <Headphones className="h-10 w-10" />,
-    title: "24/7 Support",
-    description: "Around-the-clock customer service to assist with any questions or changes to your booking.",
+    title: "24/7 Driver Support",
+    description: "Around-the-clock customer service to assist with any questions or changes to your private driver booking in Málaga.",
   },
 ];
 
@@ -62,12 +62,12 @@ const ServicesSection = () => {
     <section id="services" className="py-24">
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Our Services</span>
+          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Our Driver Services</span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Premium Transportation Services in Málaga
+            Professional Private Driver Services in Málaga
           </h2>
           <p className="text-lg text-muted-foreground">
-            We offer a range of professional driver services tailored to your needs
+            Hire experienced drivers for a range of professional transportation services tailored to your needs
           </p>
         </div>
         

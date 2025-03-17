@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { Helmet } from 'react-helmet';
 
 const BookingConfirmation = () => {
   const location = useLocation();
@@ -15,6 +16,10 @@ const BookingConfirmation = () => {
   if (!bookingData) {
     return (
       <div className="min-h-screen flex flex-col">
+        <Helmet>
+          <title>Booking Information Not Found | Málaga Driver Hub</title>
+          <meta name="description" content="Booking information not found. Please return to our homepage to book your private driver in Málaga." />
+        </Helmet>
         <Navbar />
         <main className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-md mx-auto">
@@ -34,6 +39,10 @@ const BookingConfirmation = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
+      <Helmet>
+        <title>Booking Confirmed | Private Driver Service in Málaga</title>
+        <meta name="description" content="Your private driver booking in Málaga has been confirmed. Details about your airport transfer or custom tour are available in your confirmation." />
+      </Helmet>
       <Navbar />
       <main className="flex-1 flex items-center justify-center p-6 bg-accent">
         <motion.div 
@@ -51,14 +60,14 @@ const BookingConfirmation = () => {
             >
               <CheckCircle className="h-10 w-10 text-green-600" />
             </motion.div>
-            <h1 className="text-3xl font-bold mb-2">Booking Confirmed!</h1>
+            <h1 className="text-3xl font-bold mb-2">Private Driver Booking Confirmed!</h1>
             <p className="text-muted-foreground">
-              Thank you for booking with Málaga Driver Hub. We've received your request and will contact you shortly.
+              Thank you for booking with Málaga Driver Hub. Our professional drivers will provide you with safe and reliable transportation services.
             </p>
           </div>
           
           <div className="bg-background rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">Booking Details</h2>
+            <h2 className="text-xl font-semibold mb-4">Your Private Driver Booking Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-muted-foreground">Pickup Location</p>
@@ -80,7 +89,7 @@ const BookingConfirmation = () => {
           </div>
           
           <div className="bg-background rounded-lg p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
+            <h2 className="text-xl font-semibold mb-4">Your Contact Information</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm text-muted-foreground">Name</p>
@@ -106,7 +115,7 @@ const BookingConfirmation = () => {
           <div className="text-center">
             <p className="mb-4 text-sm text-muted-foreground">
               A confirmation email has been sent to {bookingData.email}. 
-              If you have any questions, please contact us at +34 600 000 000.
+              If you have any questions about your private driver service, please contact us at +34 600 000 000.
             </p>
             <Button onClick={() => navigate('/')} size="lg">
               Return to Home

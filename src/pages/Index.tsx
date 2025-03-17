@@ -1,6 +1,7 @@
 
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
@@ -56,6 +57,12 @@ const Index = () => {
       transition={{ duration: 0.5 }}
       className="relative" // Add relative position to fix framer-motion warning
     >
+      <Helmet>
+        <title>Hire Private Drivers in Málaga | Airport Transfers & Custom Tours</title>
+        <meta name="description" content="Book professional private drivers in Málaga for airport transfers, day trips, and custom tours. Safe and reliable transportation services across Costa del Sol." />
+        <meta name="keywords" content="hire driver Málaga, private driver, Málaga airport transfer, Costa del Sol transportation, professional driver service" />
+        <link rel="canonical" href="https://malagadriverhub.com" />
+      </Helmet>
       <Navbar />
       <HeroSection />
       <ServicesSection />

@@ -17,7 +17,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Ready to Book?</span>
+            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Book Your Private Driver</span>
           </motion.div>
           
           <motion.h2 
@@ -27,7 +27,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Experience Málaga With a Private Driver Today
+            Hire a Professional Driver in Málaga Today
           </motion.h2>
           
           <motion.p 
@@ -37,7 +37,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Book your premium transportation service now and enjoy a stress-free, comfortable journey through Málaga and Costa del Sol
+            Book your premium private driver service now and enjoy safe, reliable transportation with professional drivers throughout Málaga and Costa del Sol
           </motion.p>
           
           <motion.div
@@ -49,7 +49,7 @@ const CtaSection = () => {
           >
             <Button asChild size="lg" className="rounded-full shadow-lg hover-lift">
               <a href="#booking">
-                Book Your Driver <ArrowRight className="ml-2 h-4 w-4" />
+                Book Your Private Driver <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </motion.div>
