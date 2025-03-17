@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Plane, MapPin } from 'lucide-react';
+import { Menu, X, Phone, Plane, MapPin, Edit } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 const locationOptions = [
   { name: "Málaga Airport", icon: <Plane className="h-4 w-4 mr-2" /> },
   { name: "Málaga City Center", icon: <MapPin className="h-4 w-4 mr-2" /> },
-  { name: "Custom Location", icon: <MapPin className="h-4 w-4 mr-2" /> },
+  { name: "Custom Location", icon: <Edit className="h-4 w-4 mr-2" /> },
 ];
 
 const Navbar = () => {
@@ -55,8 +55,16 @@ const Navbar = () => {
         behavior: 'smooth'
       });
       
-      // Here you could also pre-fill the pickup location in the booking form
-      // This would require lifting state up or using a context/state management
+      // If we had a global state manager, we could update the pickup location here
+      // For now we'll add a small delay and try to set the value using DOM methods
+      setTimeout(() => {
+        // Find select element and set the value
+        const pickupSelect = document.querySelector('[id^="radix-:"][aria-expanded="false"]');
+        if (pickupSelect && pickupSelect instanceof HTMLElement) {
+          pickupSelect.click();
+          // This is not ideal, but for demonstration. In a real app, use a state manager
+        }
+      }, 800);
     }
   };
   

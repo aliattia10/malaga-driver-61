@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
@@ -32,7 +33,8 @@ const locations = [
   "Estepona",
   "Mijas",
   "Nerja",
-  "Ronda"
+  "Ronda",
+  "Custom Location"
 ];
 
 const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
@@ -45,13 +47,16 @@ const BookingForm = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     pickupLocation: '',
+    customPickupLocation: '',
     dropoffLocation: '',
+    customDropoffLocation: '',
     date: new Date(),
     time: '12:00',
     passengers: '1',
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    specialRequests: ''
   });
   
   const [currentStep, setCurrentStep] = useState(1);
@@ -63,13 +68,41 @@ const BookingForm = () => {
   const nextStep = () => setCurrentStep(prev => prev + 1);
   const prevStep = () => setCurrentStep(prev => prev - 1);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Booking Submitted",
-      description: "We've received your booking request. We'll contact you shortly to confirm your reservation.",
-    });
-    console.log("Booking data:", formData);
+    
+    // Format the booking data
+    const bookingData = {
+      ...formData,
+      pickupLocation: formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : formData.pickupLocation,
+      dropoffLocation: formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : formData.dropoffLocation,
+      dateTime: `${format(formData.date, 'yyyy-MM-dd')}T${formData.time}`,
+      submittedAt: new Date().toISOString()
+    };
+    
+    // Here you would integrate with a notification service like email, SMS, or webhooks
+    console.log("Booking data to be sent:", bookingData);
+    
+    try {
+      // This is a placeholder for where you would send the data to your notification service
+      // Example: await sendBookingNotification(bookingData);
+      
+      toast({
+        title: "Booking Submitted",
+        description: "We've received your booking request. We'll contact you shortly to confirm your reservation.",
+      });
+      
+      // Reset form after successful submission if needed
+      // setFormData({...initial state...});
+      // setCurrentStep(1);
+    } catch (error) {
+      console.error("Error submitting booking:", error);
+      toast({
+        title: "Submission Error",
+        description: "There was a problem submitting your booking. Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    }
   };
   
   return (
@@ -145,6 +178,17 @@ const BookingForm = () => {
                           ))}
                         </SelectContent>
                       </Select>
+                      
+                      {formData.pickupLocation === 'Custom Location' && (
+                        <div className="mt-2">
+                          <Input
+                            placeholder="Enter address, hotel name, or landmark"
+                            value={formData.customPickupLocation}
+                            onChange={(e) => handleChange('customPickupLocation', e.target.value)}
+                            required
+                          />
+                        </div>
+                      )}
                     </div>
                     
                     <div className="space-y-2">
@@ -165,6 +209,17 @@ const BookingForm = () => {
                           ))}
                         </SelectContent>
                       </Select>
+                      
+                      {formData.dropoffLocation === 'Custom Location' && (
+                        <div className="mt-2">
+                          <Input
+                            placeholder="Enter address, hotel name, or landmark"
+                            value={formData.customDropoffLocation}
+                            onChange={(e) => handleChange('customDropoffLocation', e.target.value)}
+                            required
+                          />
+                        </div>
+                      )}
                     </div>
                     
                     <div className="space-y-2">
@@ -191,7 +246,9 @@ const BookingForm = () => {
                     type="button" 
                     className="w-full rounded-lg"
                     onClick={nextStep}
-                    disabled={!formData.pickupLocation || !formData.dropoffLocation}
+                    disabled={!formData.pickupLocation || !formData.dropoffLocation || 
+                              (formData.pickupLocation === 'Custom Location' && !formData.customPickupLocation) || 
+                              (formData.dropoffLocation === 'Custom Location' && !formData.customDropoffLocation)}
                   >
                     Continue to Date & Time
                   </Button>
@@ -330,14 +387,27 @@ const BookingForm = () => {
                     />
                   </div>
                   
+                  <div className="space-y-2">
+                    <label htmlFor="specialRequests" className="text-sm font-medium">
+                      Special Requests (Optional)
+                    </label>
+                    <Textarea
+                      id="specialRequests"
+                      value={formData.specialRequests}
+                      onChange={(e) => handleChange('specialRequests', e.target.value)}
+                      placeholder="Any special requirements or information we should know?"
+                      rows={3}
+                    />
+                  </div>
+                  
                   <div className="bg-muted p-4 rounded-lg mb-4">
                     <h4 className="font-medium mb-2">Booking Summary</h4>
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
                       <div className="text-muted-foreground">Pickup:</div>
-                      <div>{formData.pickupLocation}</div>
+                      <div>{formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : formData.pickupLocation}</div>
                       
                       <div className="text-muted-foreground">Dropoff:</div>
-                      <div>{formData.dropoffLocation}</div>
+                      <div>{formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : formData.dropoffLocation}</div>
                       
                       <div className="text-muted-foreground">Date:</div>
                       <div>{format(formData.date, 'PP')}</div>
