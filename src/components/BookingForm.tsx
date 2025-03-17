@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -21,6 +20,7 @@ import { cn } from '@/lib/utils';
 import { Calendar as CalendarIcon, Clock, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const locations = [
   "Málaga Airport",
@@ -45,6 +45,7 @@ const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
 
 const BookingForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     pickupLocation: '',
     customPickupLocation: '',
@@ -92,9 +93,9 @@ const BookingForm = () => {
         description: "We've received your booking request. We'll contact you shortly to confirm your reservation.",
       });
       
-      // Reset form after successful submission if needed
-      // setFormData({...initial state...});
-      // setCurrentStep(1);
+      // Navigate to the confirmation page with booking data
+      navigate('/booking-confirmation', { state: { bookingData } });
+      
     } catch (error) {
       console.error("Error submitting booking:", error);
       toast({
