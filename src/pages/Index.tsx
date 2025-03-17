@@ -23,8 +23,11 @@ const Index = () => {
         const targetElement = document.querySelector(targetId);
         if (!targetElement) return;
         
+        // Use getBoundingClientRect instead of offsetTop
+        const top = targetElement.getBoundingClientRect().top + window.scrollY - 80;
+        
         window.scrollTo({
-          top: targetElement.offsetTop - 80, // Offset for fixed header
+          top,
           behavior: 'smooth'
         });
       });
@@ -35,8 +38,9 @@ const Index = () => {
       const targetElement = document.querySelector(window.location.hash);
       if (targetElement) {
         setTimeout(() => {
+          const top = targetElement.getBoundingClientRect().top + window.scrollY - 80;
           window.scrollTo({
-            top: targetElement.offsetTop - 80,
+            top,
             behavior: 'smooth'
           });
         }, 100);
@@ -50,6 +54,7 @@ const Index = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
+      className="relative" // Add relative position to fix framer-motion warning
     >
       <Navbar />
       <HeroSection />
