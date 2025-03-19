@@ -6,12 +6,14 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { GoogleSheetsService } from '@/services/GoogleSheetsService';
 import { useToast } from '@/components/ui/use-toast';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { BookOpen, Check, AlertCircle, Link2 } from 'lucide-react';
+import { BookOpen, Check, AlertCircle, Link2, ExternalLink } from 'lucide-react';
+import { Label } from '@/components/ui/label';
 
 const GoogleSheetsConfig = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState('');
   const [isConfigured, setIsConfigured] = useState(false);
+  const spreadsheetUrl = GoogleSheetsService.getSpreadsheetUrl();
 
   useEffect(() => {
     const savedUrl = GoogleSheetsService.getWebhookUrl();
@@ -72,6 +74,28 @@ const GoogleSheetsConfig = () => {
             <CardContent>
               <div className="space-y-4">
                 <div className="space-y-2">
+                  <Label htmlFor="spreadsheet-url">Connected Spreadsheet</Label>
+                  <div className="flex items-center gap-2">
+                    <Input
+                      id="spreadsheet-url"
+                      value={spreadsheetUrl}
+                      readOnly
+                      className="w-full bg-muted"
+                    />
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      asChild
+                    >
+                      <a href={spreadsheetUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="webhook-url">Webhook URL</Label>
                   <Input
                     id="webhook-url"
                     value={webhookUrl}

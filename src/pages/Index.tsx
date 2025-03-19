@@ -60,8 +60,13 @@ const Index = () => {
       <Helmet>
         <title>Hire Private Drivers in Málaga | Airport Transfers & Custom Tours</title>
         <meta name="description" content="Book professional private drivers in Málaga for airport transfers, day trips, and custom tours. Safe and reliable transportation services across Costa del Sol." />
-        <meta name="keywords" content="hire driver Málaga, private driver, Málaga airport transfer, Costa del Sol transportation, professional driver service" />
+        <meta name="keywords" content="hire driver Málaga, private driver, Málaga airport transfer, Costa del Sol transportation, professional driver service, driver for hire" />
         <link rel="canonical" href="https://malagadriverhub.com" />
+        <meta property="og:title" content="Hire Private Drivers in Málaga | Airport Transfers & Custom Tours" />
+        <meta property="og:description" content="Book professional private drivers in Málaga for airport transfers, day trips, and custom tours. Safe and reliable transportation services across Costa del Sol." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://malagadriverhub.com" />
+        <meta property="og:image" content="/og-image.png" />
       </Helmet>
       <Navbar />
       <HeroSection />

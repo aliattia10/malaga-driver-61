@@ -16,6 +16,12 @@ export interface BookingData {
 
 export class GoogleSheetsService {
   private static webhookUrl: string | null = null;
+  private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
+
+  // Get the spreadsheet URL
+  static getSpreadsheetUrl(): string {
+    return this.spreadsheetUrl;
+  }
 
   // Save the webhook URL to localStorage
   static saveWebhookUrl(url: string): void {
