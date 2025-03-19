@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, Plane, MapPin, Edit } from 'lucide-react';
+import { Menu, X, Phone, Plane, MapPin, Edit, Globe } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import {
@@ -67,6 +67,12 @@ const Navbar = () => {
       }, 800);
     }
   };
+
+  const handleLanguageSwitch = (language: string) => {
+    console.log(`Switching to language: ${language}`);
+    // This would typically update a language context or state
+    // and trigger a re-render with translated content
+  };
   
   return (
     <header className={cn(
@@ -74,6 +80,25 @@ const Navbar = () => {
       isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md" : "bg-transparent"
     )}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
+        {/* Language Switcher */}
+        <div className="relative z-10">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="rounded-full" aria-label="Switch language">
+                <Globe className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem onClick={() => handleLanguageSwitch('en')}>
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleLanguageSwitch('es')}>
+                Español
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+        
         {/* Logo */}
         <a href="#" className="text-2xl font-display font-semibold tracking-tight transition-colors">
           <span className="text-primary">Málaga</span> Driver Hub
@@ -112,8 +137,8 @@ const Navbar = () => {
           <a href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary">Testimonials</a>
           <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">About Us</a>
           <Button asChild variant="outline" className="rounded-full">
-            <a href="tel:+34600000000">
-              <Phone className="mr-2 h-4 w-4" /> +34 600 000 000
+            <a href="tel:+34620173295">
+              <Phone className="mr-2 h-4 w-4" /> +34 620 173 295
             </a>
           </Button>
         </nav>
@@ -134,6 +159,25 @@ const Navbar = () => {
         isOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none"
       )}>
         <div className="flex flex-col h-full pt-20 px-8 pb-8 space-y-6">
+          <div className="flex space-x-4 mb-4">
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => handleLanguageSwitch('en')}
+              className="flex-1"
+            >
+              English
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => handleLanguageSwitch('es')}
+              className="flex-1"
+            >
+              Español
+            </Button>
+          </div>
+          
           <div className="space-y-1">
             <p className="text-sm font-semibold text-muted-foreground mb-2">Locations</p>
             {locationOptions.map((location) => (
@@ -182,8 +226,8 @@ const Navbar = () => {
           </a>
           <div className="mt-auto pt-8">
             <Button asChild size="lg" className="w-full rounded-full">
-              <a href="tel:+34600000000">
-                <Phone className="mr-2 h-4 w-4" /> Call Now: +34 600 000 000
+              <a href="tel:+34620173295">
+                <Phone className="mr-2 h-4 w-4" /> Call Now: +34 620 173 295
               </a>
             </Button>
           </div>
