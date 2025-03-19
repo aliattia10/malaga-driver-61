@@ -21,6 +21,8 @@ import { Calendar as CalendarIcon, Clock, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import { GoogleSheetsService } from '@/services/GoogleSheetsService';
+import GoogleSheetsConfig from '@/components/GoogleSheetsConfig';
 
 const locations = [
   "Málaga Airport",
@@ -81,12 +83,15 @@ const BookingForm = () => {
       submittedAt: new Date().toISOString()
     };
     
-    // Here you would integrate with a notification service like email, SMS, or webhooks
     console.log("Booking data to be sent:", bookingData);
     
     try {
-      // This is a placeholder for where you would send the data to your notification service
-      // Example: await sendBookingNotification(bookingData);
+      // Submit to Google Sheets if configured
+      const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);
+      
+      if (!sheetsResult.success) {
+        console.log("Google Sheets submission note:", sheetsResult.message);
+      }
       
       toast({
         title: "Booking Submitted",
@@ -117,6 +122,10 @@ const BookingForm = () => {
           <p className="text-lg text-muted-foreground">
             Complete the form below to book your private driver in Málaga.
           </p>
+          
+          <div className="mt-4">
+            <GoogleSheetsConfig />
+          </div>
         </div>
         
         <div className="max-w-4xl mx-auto">
@@ -142,7 +151,6 @@ const BookingForm = () => {
                 </div>
               ))}
               
-              {/* Progress line */}
               <div className="absolute top-5 left-0 right-0 h-0.5 bg-secondary">
                 <div 
                   className="h-full bg-primary transition-all duration-300" 

@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 const BookingConfirmation = () => {
   const location = useLocation();
