@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -25,6 +26,7 @@ import { GoogleSheetsService } from '@/services/GoogleSheetsService';
 import GoogleSheetsConfig from '@/components/GoogleSheetsConfig';
 
 const locations = [
+  "Custom Location",
   "Málaga Airport",
   "Málaga City Center",
   "Torremolinos",
@@ -35,8 +37,7 @@ const locations = [
   "Estepona",
   "Mijas",
   "Nerja",
-  "Ronda",
-  "Custom Location"
+  "Ronda"
 ];
 
 const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {

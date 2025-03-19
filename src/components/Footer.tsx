@@ -66,15 +66,15 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Phone className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">+34 600 000 000</span>
+                <span className="text-muted-foreground">+34 620 173 295</span>
               </li>
               <li className="flex items-start">
                 <Mail className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">info@malagadriverhub.com</span>
+                <span className="text-muted-foreground">malagadriverhub@gmail.com</span>
               </li>
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">Calle Marqués de Larios, 29005 Málaga, Spain</span>
+                <span className="text-muted-foreground">Av. del Comandante García Morato s/n, Churriana, 29004 Málaga, Andalucía, España</span>
               </li>
             </ul>
           </div>

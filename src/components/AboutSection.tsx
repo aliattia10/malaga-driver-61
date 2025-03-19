@@ -86,7 +86,7 @@ const AboutSection = () => {
             <div className="relative w-full h-full">
               <motion.div 
                 className="absolute inset-0 bg-cover bg-center rounded-2xl elegant-shadow"
-                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1511096675011-cdebb21fa97f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')` }}
+                style={{ backgroundImage: `url('https://images.unsplash.com/photo-1560031898-fa65b5de30a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')` }}
                 initial={{ scale: 1.1 }}
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 1.5 }}
@@ -98,6 +98,13 @@ const AboutSection = () => {
                   <p className="text-sm md:text-base font-medium">
                     Experience the beautiful coastline and cultural richness of Málaga with professional drivers who truly know the region.
                   </p>
+                  <div className="mt-4">
+                    <img 
+                      src="https://images.unsplash.com/photo-1544642899-f0d6e5f6ed6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                      alt="Professional Málaga driver showing tourists local attractions" 
+                      className="w-full h-32 object-cover rounded-md"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

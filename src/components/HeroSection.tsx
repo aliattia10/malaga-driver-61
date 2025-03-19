@@ -56,7 +56,7 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-black/30 to-transparent z-10"></div>
-            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')` }}></div>
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')` }}></div>
             <div className="absolute bottom-8 left-8 z-20">
               <span className="glass-panel py-2 px-4 rounded-lg text-sm font-medium">Professional drivers in Málaga for hire</span>
             </div>
