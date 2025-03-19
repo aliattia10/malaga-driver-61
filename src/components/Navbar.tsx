@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const locationOptions = [
   { name: "Málaga Airport", icon: <Plane className="h-4 w-4 mr-2" /> },
@@ -29,6 +30,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
+  const { language, setLanguage, t } = useLanguage();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -68,10 +70,8 @@ const Navbar = () => {
     }
   };
 
-  const handleLanguageSwitch = (language: string) => {
-    console.log(`Switching to language: ${language}`);
-    // This would typically update a language context or state
-    // and trigger a re-render with translated content
+  const handleLanguageSwitch = (lang: 'en' | 'es') => {
+    setLanguage(lang);
   };
   
   return (
@@ -80,25 +80,6 @@ const Navbar = () => {
       isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md" : "bg-transparent"
     )}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Language Switcher */}
-        <div className="relative z-10">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full" aria-label="Switch language">
-                <Globe className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              <DropdownMenuItem onClick={() => handleLanguageSwitch('en')}>
-                English
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => handleLanguageSwitch('es')}>
-                Español
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-        
         {/* Logo */}
         <a href="#" className="text-2xl font-display font-semibold tracking-tight transition-colors">
           <span className="text-primary">Málaga</span> Driver Hub
@@ -109,7 +90,9 @@ const Navbar = () => {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-sm font-medium transition-colors hover:text-primary">Locations</NavigationMenuTrigger>
+                <NavigationMenuTrigger className="text-sm font-medium transition-colors hover:text-primary">
+                  {t('navbar.locations')}
+                </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid gap-2 p-4 w-[220px]">
                     {locationOptions.map((location) => (
@@ -121,7 +104,7 @@ const Navbar = () => {
                             onClick={() => handleLocationSelect(location.name)}
                           >
                             {location.icon}
-                            {location.name}
+                            {t(`locations.${location.name.toLowerCase().replace(/\s+/g, '_')}`)}
                           </Button>
                         </NavigationMenuLink>
                       </li>
@@ -132,10 +115,10 @@ const Navbar = () => {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <a href="#services" className="text-sm font-medium transition-colors hover:text-primary">Services</a>
-          <a href="#booking" className="text-sm font-medium transition-colors hover:text-primary">Book Now</a>
-          <a href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary">Testimonials</a>
-          <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">About Us</a>
+          <a href="#services" className="text-sm font-medium transition-colors hover:text-primary">{t('navbar.services')}</a>
+          <a href="#booking" className="text-sm font-medium transition-colors hover:text-primary">{t('navbar.book_now')}</a>
+          <a href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary">{t('navbar.testimonials')}</a>
+          <a href="#about" className="text-sm font-medium transition-colors hover:text-primary">{t('navbar.about_us')}</a>
           <Button asChild variant="outline" className="rounded-full">
             <a href="tel:+34620173295">
               <Phone className="mr-2 h-4 w-4" /> +34 620 173 295
@@ -143,6 +126,26 @@ const Navbar = () => {
           </Button>
         </nav>
         
+        {/* Language Switcher - Top Right */}
+        <div className="relative z-10">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm" className="rounded-full border-primary text-primary hover:bg-primary/10">
+                <Globe className="h-4 w-4 mr-2" /> 
+                {language === 'en' ? 'EN' : 'ES'}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => handleLanguageSwitch('en')} className={language === 'en' ? "bg-primary/10" : ""}>
+                English
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => handleLanguageSwitch('es')} className={language === 'es' ? "bg-primary/10" : ""}>
+                Español
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+
         {/* Mobile Menu Toggle */}
         <button 
           className="md:hidden text-gray-700 hover:text-primary focus:outline-none"
@@ -164,7 +167,7 @@ const Navbar = () => {
               variant="outline" 
               size="sm" 
               onClick={() => handleLanguageSwitch('en')}
-              className="flex-1"
+              className={cn("flex-1", language === 'en' ? "bg-primary/10 border-primary text-primary" : "")}
             >
               English
             </Button>
@@ -172,14 +175,14 @@ const Navbar = () => {
               variant="outline" 
               size="sm" 
               onClick={() => handleLanguageSwitch('es')}
-              className="flex-1"
+              className={cn("flex-1", language === 'es' ? "bg-primary/10 border-primary text-primary" : "")}
             >
               Español
             </Button>
           </div>
           
           <div className="space-y-1">
-            <p className="text-sm font-semibold text-muted-foreground mb-2">Locations</p>
+            <p className="text-sm font-semibold text-muted-foreground mb-2">{t('navbar.locations')}</p>
             {locationOptions.map((location) => (
               <Button 
                 key={location.name}
@@ -191,7 +194,7 @@ const Navbar = () => {
                 }}
               >
                 {location.icon}
-                {location.name}
+                {t(`locations.${location.name.toLowerCase().replace(/\s+/g, '_')}`)}
               </Button>
             ))}
           </div>
@@ -201,33 +204,33 @@ const Navbar = () => {
             className="text-xl font-medium transition-colors hover:text-primary"
             onClick={toggleMenu}
           >
-            Services
+            {t('navbar.services')}
           </a>
           <a 
             href="#booking" 
             className="text-xl font-medium transition-colors hover:text-primary"
             onClick={toggleMenu}
           >
-            Book Now
+            {t('navbar.book_now')}
           </a>
           <a 
             href="#testimonials" 
             className="text-xl font-medium transition-colors hover:text-primary"
             onClick={toggleMenu}
           >
-            Testimonials
+            {t('navbar.testimonials')}
           </a>
           <a 
             href="#about" 
             className="text-xl font-medium transition-colors hover:text-primary"
             onClick={toggleMenu}
           >
-            About Us
+            {t('navbar.about_us')}
           </a>
           <div className="mt-auto pt-8">
             <Button asChild size="lg" className="w-full rounded-full">
               <a href="tel:+34620173295">
-                <Phone className="mr-2 h-4 w-4" /> Call Now: +34 620 173 295
+                <Phone className="mr-2 h-4 w-4" /> {t('navbar.call_now')}: +34 620 173 295
               </a>
             </Button>
           </div>
