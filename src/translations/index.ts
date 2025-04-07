@@ -41,8 +41,8 @@ const translations = {
       }
     },
     pricing: {
-      title: "My Prices",
-      distance_based: "My prices are based on distance (per kilometer):",
+      title: "Our Pricing",
+      distance_based: "Our prices are based on distance (per kilometer):",
       example1: "48 km = 48 € cash",
       example2: "62 km = 62 € cash",
       and_so_on: "And so on...",
@@ -139,8 +139,8 @@ const translations = {
       }
     },
     pricing: {
-      title: "Mis Precios",
-      distance_based: "Mis precios están basados en la distancia (por kilómetro):",
+      title: "Nuestros Precios",
+      distance_based: "Nuestros precios se basan en la distancia (por kilómetro):",
       example1: "48 km = 48 € en efectivo",
       example2: "62 km = 62 € en efectivo",
       and_so_on: "Y así sucesivamente…",
@@ -152,7 +152,7 @@ const translations = {
       example_3people: "60 km con 1 a 3 personas → 60 €",
       example_4people: "60 km con 4 personas → 60 € + 10 € = 70 €",
       example_5people: "60 km con 5 personas → 60 € + 10 € + 10 € = 80 €",
-      book_now: "Reserva ya y viaja sin complicaciones."
+      book_now: "Reserve ahora y viaje sin complicaciones."
     },
     booking: {
       title: "Reserve Su Conductor Privado",

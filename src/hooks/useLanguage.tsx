@@ -12,55 +12,62 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<"en" | "es">("en");
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Detect user's browser language or use geolocation on first visit
   useEffect(() => {
-    const savedLanguage = localStorage.getItem("language") as "en" | "es" | null;
-    
-    if (savedLanguage) {
-      setLanguageState(savedLanguage);
-    } else {
+    const detectLanguage = async () => {
+      const savedLanguage = localStorage.getItem("language") as "en" | "es" | null;
+      
+      if (savedLanguage) {
+        setLanguageState(savedLanguage);
+        setIsInitialized(true);
+        console.log(`Using saved language preference: ${savedLanguage}`);
+        return;
+      }
+
       // Try to detect browser language
       const browserLang = navigator.language.split('-')[0].toLowerCase();
+      console.log(`Detected browser language: ${browserLang}`);
+      
+      // Default to browser language if it's Spanish
+      if (browserLang === 'es') {
+        setLanguageState('es');
+        localStorage.setItem("language", 'es');
+        setIsInitialized(true);
+        console.log('Language set to Spanish based on browser language');
+        return;
+      }
       
       // Try to detect user's country via their IP (this is approximate)
       try {
-        fetch('https://ipapi.co/json/')
-          .then(response => response.json())
-          .then(data => {
-            // If in a Spanish speaking country, default to Spanish
-            const spanishCountries = ['es', 'mx', 'ar', 'co', 'pe', 've', 'cl', 'ec', 'gt', 'cu', 'bo', 'do', 'hn', 'py', 'sv', 'ni', 'cr', 'pa', 'uy', 'pr', 'gq'];
-            if (spanishCountries.includes(data.country_code?.toLowerCase())) {
-              setLanguageState('es');
-              localStorage.setItem("language", 'es');
-              console.log(`Language set to Spanish based on location: ${data.country_code}`);
-            } else if (browserLang === 'es') {
-              // Fall back to browser language if API returns non-Spanish country
-              setLanguageState('es');
-              localStorage.setItem("language", 'es');
-              console.log('Language set to Spanish based on browser language');
-            } else {
-              setLanguageState('en');
-              localStorage.setItem("language", 'en');
-              console.log(`Language set to English based on location: ${data.country_code}`);
-            }
-          })
-          .catch((error) => {
-            // If API call fails, just use browser language
-            console.log('Location API error, falling back to browser language:', error);
-            const detectedLang = browserLang === 'es' ? 'es' : 'en';
-            setLanguageState(detectedLang);
-            localStorage.setItem("language", detectedLang);
-            console.log(`Language set to ${detectedLang} based on browser language`);
-          });
+        const response = await fetch('https://ipapi.co/json/');
+        const data = await response.json();
+        
+        // List of Spanish speaking countries
+        const spanishCountries = ['es', 'mx', 'ar', 'co', 'pe', 've', 'cl', 'ec', 'gt', 'cu', 'bo', 'do', 'hn', 'py', 'sv', 'ni', 'cr', 'pa', 'uy', 'pr', 'gq'];
+        
+        if (spanishCountries.includes(data.country_code?.toLowerCase())) {
+          setLanguageState('es');
+          localStorage.setItem("language", 'es');
+          console.log(`Language set to Spanish based on detected location: ${data.country_code}`);
+        } else {
+          setLanguageState('en');
+          localStorage.setItem("language", 'en');
+          console.log(`Language set to English based on detected location: ${data.country_code}`);
+        }
       } catch (error) {
-        // If anything fails, default to browser language detection
-        console.log('General error in language detection, using browser language:', error);
+        // If API call fails, just use browser language or default to English
         const detectedLang = browserLang === 'es' ? 'es' : 'en';
         setLanguageState(detectedLang);
         localStorage.setItem("language", detectedLang);
+        console.log(`Location API error, falling back to browser language: ${detectedLang}`, error);
       }
-    }
+      
+      setIsInitialized(true);
+    };
+    
+    detectLanguage();
   }, []);
 
   const setLanguage = (lang: "en" | "es") => {
@@ -71,6 +78,13 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
   // Translation function
   const t = (key: string): string => {
+    if (!isInitialized) {
+      console.log("Translation requested before language initialized, using fallback");
+      // Return a sensible fallback based on the key's last part
+      const keyParts = key.split('.');
+      return keyParts[keyParts.length - 1].replace(/_/g, ' ');
+    }
+    
     const keys = key.split('.');
     let value: any = translations[language];
     

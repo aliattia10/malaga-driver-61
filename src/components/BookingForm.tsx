@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -24,6 +23,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { GoogleSheetsService } from '@/services/GoogleSheetsService';
 import GoogleSheetsConfig from '@/components/GoogleSheetsConfig';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const locations = [
   "Custom Location",
@@ -49,6 +49,8 @@ const timeSlots = Array.from({ length: 24 * 4 }, (_, i) => {
 const BookingForm = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useLanguage();
+  
   const [formData, setFormData] = useState({
     pickupLocation: '',
     customPickupLocation: '',
@@ -75,7 +77,6 @@ const BookingForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Format the booking data
     const bookingData = {
       ...formData,
       pickupLocation: formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : formData.pickupLocation,
@@ -87,7 +88,6 @@ const BookingForm = () => {
     console.log("Booking data to be sent:", bookingData);
     
     try {
-      // Submit to Google Sheets if configured
       const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);
       
       if (!sheetsResult.success) {
@@ -99,7 +99,6 @@ const BookingForm = () => {
         description: "We've received your booking request. We'll contact you shortly to confirm your reservation.",
       });
       
-      // Navigate to the confirmation page with booking data
       navigate('/booking-confirmation', { state: { bookingData } });
       
     } catch (error) {
@@ -116,15 +115,15 @@ const BookingForm = () => {
     <section id="booking" className="py-24 bg-accent">
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Book Your Ride</span>
+          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">{t('booking.title')}</span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Experience Premium Transportation?
+            {t('booking.subtitle')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Complete the form below to book your private driver in Málaga.
+            {t('booking.form.description')}
           </p>
           
-          <div className="mt-4">
+          <div className="hidden">
             <GoogleSheetsConfig />
           </div>
         </div>
