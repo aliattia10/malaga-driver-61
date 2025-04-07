@@ -30,26 +30,32 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
           .then(data => {
             // If in a Spanish speaking country, default to Spanish
             const spanishCountries = ['es', 'mx', 'ar', 'co', 'pe', 've', 'cl', 'ec', 'gt', 'cu', 'bo', 'do', 'hn', 'py', 'sv', 'ni', 'cr', 'pa', 'uy', 'pr', 'gq'];
-            if (spanishCountries.includes(data.country_code.toLowerCase())) {
+            if (spanishCountries.includes(data.country_code?.toLowerCase())) {
               setLanguageState('es');
               localStorage.setItem("language", 'es');
+              console.log(`Language set to Spanish based on location: ${data.country_code}`);
             } else if (browserLang === 'es') {
-              // Fall back to browser language if API fails
+              // Fall back to browser language if API returns non-Spanish country
               setLanguageState('es');
               localStorage.setItem("language", 'es');
+              console.log('Language set to Spanish based on browser language');
             } else {
               setLanguageState('en');
               localStorage.setItem("language", 'en');
+              console.log(`Language set to English based on location: ${data.country_code}`);
             }
           })
-          .catch(() => {
+          .catch((error) => {
             // If API call fails, just use browser language
+            console.log('Location API error, falling back to browser language:', error);
             const detectedLang = browserLang === 'es' ? 'es' : 'en';
             setLanguageState(detectedLang);
             localStorage.setItem("language", detectedLang);
+            console.log(`Language set to ${detectedLang} based on browser language`);
           });
       } catch (error) {
         // If anything fails, default to browser language detection
+        console.log('General error in language detection, using browser language:', error);
         const detectedLang = browserLang === 'es' ? 'es' : 'en';
         setLanguageState(detectedLang);
         localStorage.setItem("language", detectedLang);
@@ -60,6 +66,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const setLanguage = (lang: "en" | "es") => {
     setLanguageState(lang);
     localStorage.setItem("language", lang);
+    console.log(`Language manually set to: ${lang}`);
   };
 
   // Translation function

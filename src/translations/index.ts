@@ -1,4 +1,3 @@
-
 const translations = {
   en: {
     navbar: {
@@ -47,7 +46,7 @@ const translations = {
       example1: "48 km = 48 € cash",
       example2: "62 km = 62 € cash",
       and_so_on: "And so on...",
-      base_price_valid: "✔️ This price is valid for 1 to 3 people.",
+      base_price_valid: "This price is valid for 1 to 3 people.",
       additional_people: "Additional People",
       fourth_person: "4th person: +10 € extra",
       fifth_person: "5th person: +10 € additional",
@@ -94,7 +93,8 @@ const translations = {
       copyright: "© 2023 Málaga Driver Hub. All rights reserved."
     },
     whatsapp: {
-      message: "Contact us via WhatsApp"
+      message: "Contact us via WhatsApp",
+      contact_now: "Contact us now"
     }
   },
   es: {
@@ -144,15 +144,15 @@ const translations = {
       example1: "48 km = 48 € en efectivo",
       example2: "62 km = 62 € en efectivo",
       and_so_on: "Y así sucesivamente…",
-      base_price_valid: "✔️ Este precio es válido para 1 a 3 personas.",
-      additional_people: "👥 Personas Adicionales",
+      base_price_valid: "Este precio es válido para 1 a 3 personas.",
+      additional_people: "Personas Adicionales",
       fourth_person: "4ª persona: +10 € extra",
       fifth_person: "5ª persona: +10 € adicionales",
       example_title: "Ejemplo:",
       example_3people: "60 km con 1 a 3 personas → 60 €",
       example_4people: "60 km con 4 personas → 60 € + 10 € = 70 €",
       example_5people: "60 km con 5 personas → 60 € + 10 € + 10 € = 80 €",
-      book_now: "📲 Reserva ya y viaja sin complicaciones."
+      book_now: "Reserva ya y viaja sin complicaciones."
     },
     booking: {
       title: "Reserve Su Conductor Privado",
@@ -191,7 +191,8 @@ const translations = {
       copyright: "© 2023 Málaga Driver Hub. Todos los derechos reservados."
     },
     whatsapp: {
-      message: "Contáctanos por WhatsApp"
+      message: "Contáctanos por WhatsApp",
+      contact_now: "Contáctanos ahora"
     }
   }
 };
