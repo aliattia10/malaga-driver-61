@@ -5,11 +5,13 @@ import { Helmet } from 'react-helmet-async';
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ServicesSection from '@/components/ServicesSection';
+import PricingSection from '@/components/PricingSection';
 import BookingForm from '@/components/BookingForm';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import AboutSection from '@/components/AboutSection';
 import CtaSection from '@/components/CtaSection';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 const Index = () => {
   useEffect(() => {
@@ -71,11 +73,13 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <ServicesSection />
+      <PricingSection />
       <BookingForm />
       <TestimonialsSection />
       <AboutSection />
       <CtaSection />
       <Footer />
+      <WhatsAppButton />
     </motion.div>
   );
 };

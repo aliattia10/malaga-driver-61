@@ -22,8 +22,38 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     } else {
       // Try to detect browser language
       const browserLang = navigator.language.split('-')[0].toLowerCase();
-      const detectedLang = browserLang === 'es' ? 'es' : 'en';
-      setLanguageState(detectedLang);
+      
+      // Try to detect user's country via their IP (this is approximate)
+      try {
+        fetch('https://ipapi.co/json/')
+          .then(response => response.json())
+          .then(data => {
+            // If in a Spanish speaking country, default to Spanish
+            const spanishCountries = ['es', 'mx', 'ar', 'co', 'pe', 've', 'cl', 'ec', 'gt', 'cu', 'bo', 'do', 'hn', 'py', 'sv', 'ni', 'cr', 'pa', 'uy', 'pr', 'gq'];
+            if (spanishCountries.includes(data.country_code.toLowerCase())) {
+              setLanguageState('es');
+              localStorage.setItem("language", 'es');
+            } else if (browserLang === 'es') {
+              // Fall back to browser language if API fails
+              setLanguageState('es');
+              localStorage.setItem("language", 'es');
+            } else {
+              setLanguageState('en');
+              localStorage.setItem("language", 'en');
+            }
+          })
+          .catch(() => {
+            // If API call fails, just use browser language
+            const detectedLang = browserLang === 'es' ? 'es' : 'en';
+            setLanguageState(detectedLang);
+            localStorage.setItem("language", detectedLang);
+          });
+      } catch (error) {
+        // If anything fails, default to browser language detection
+        const detectedLang = browserLang === 'es' ? 'es' : 'en';
+        setLanguageState(detectedLang);
+        localStorage.setItem("language", detectedLang);
+      }
     }
   }, []);
 

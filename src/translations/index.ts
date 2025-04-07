@@ -41,6 +41,22 @@ const translations = {
         description: "Professional transportation for weddings, corporate events, and special days"
       }
     },
+    pricing: {
+      title: "My Prices",
+      distance_based: "My prices are based on distance (per kilometer):",
+      example1: "48 km = 48 € cash",
+      example2: "62 km = 62 € cash",
+      and_so_on: "And so on...",
+      base_price_valid: "✔️ This price is valid for 1 to 3 people.",
+      additional_people: "Additional People",
+      fourth_person: "4th person: +10 € extra",
+      fifth_person: "5th person: +10 € additional",
+      example_title: "Example:",
+      example_3people: "60 km with 1 to 3 people → 60 €",
+      example_4people: "60 km with 4 people → 60 € + 10 € = 70 €",
+      example_5people: "60 km with 5 people → 60 € + 10 € + 10 € = 80 €",
+      book_now: "Book now and travel without complications."
+    },
     booking: {
       title: "Book Your Private Driver",
       subtitle: "Fill out the form below to request a quote or book a service",
@@ -76,6 +92,9 @@ const translations = {
       phone: "Phone",
       email: "Email",
       copyright: "© 2023 Málaga Driver Hub. All rights reserved."
+    },
+    whatsapp: {
+      message: "Contact us via WhatsApp"
     }
   },
   es: {
@@ -119,6 +138,22 @@ const translations = {
         description: "Transporte profesional para bodas, eventos corporativos y días especiales"
       }
     },
+    pricing: {
+      title: "Mis Precios",
+      distance_based: "Mis precios están basados en la distancia (por kilómetro):",
+      example1: "48 km = 48 € en efectivo",
+      example2: "62 km = 62 € en efectivo",
+      and_so_on: "Y así sucesivamente…",
+      base_price_valid: "✔️ Este precio es válido para 1 a 3 personas.",
+      additional_people: "👥 Personas Adicionales",
+      fourth_person: "4ª persona: +10 € extra",
+      fifth_person: "5ª persona: +10 € adicionales",
+      example_title: "Ejemplo:",
+      example_3people: "60 km con 1 a 3 personas → 60 €",
+      example_4people: "60 km con 4 personas → 60 € + 10 € = 70 €",
+      example_5people: "60 km con 5 personas → 60 € + 10 € + 10 € = 80 €",
+      book_now: "📲 Reserva ya y viaja sin complicaciones."
+    },
     booking: {
       title: "Reserve Su Conductor Privado",
       subtitle: "Complete el formulario a continuación para solicitar un presupuesto o reservar un servicio",
@@ -154,6 +189,9 @@ const translations = {
       phone: "Teléfono",
       email: "Correo Electrónico",
       copyright: "© 2023 Málaga Driver Hub. Todos los derechos reservados."
+    },
+    whatsapp: {
+      message: "Contáctanos por WhatsApp"
     }
   }
 };
