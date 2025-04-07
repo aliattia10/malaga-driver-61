@@ -30,7 +30,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
       const browserLang = navigator.language.split('-')[0].toLowerCase();
       console.log(`Detected browser language: ${browserLang}`);
       
-      // Default to browser language if it's Spanish
+      // Set to Spanish if browser language is Spanish
       if (browserLang === 'es') {
         setLanguageState('es');
         localStorage.setItem("language", 'es');
@@ -44,7 +44,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         const response = await fetch('https://ipapi.co/json/');
         const data = await response.json();
         
-        // List of Spanish speaking countries
+        // List of Spanish speaking countries - extend this list
         const spanishCountries = ['es', 'mx', 'ar', 'co', 'pe', 've', 'cl', 'ec', 'gt', 'cu', 'bo', 'do', 'hn', 'py', 'sv', 'ni', 'cr', 'pa', 'uy', 'pr', 'gq'];
         
         if (spanishCountries.includes(data.country_code?.toLowerCase())) {
@@ -76,7 +76,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     console.log(`Language manually set to: ${lang}`);
   };
 
-  // Translation function
+  // Translation function with improved fallback
   const t = (key: string): string => {
     if (!isInitialized) {
       console.log("Translation requested before language initialized, using fallback");

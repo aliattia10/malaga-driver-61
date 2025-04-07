@@ -2,8 +2,11 @@
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const CtaSection = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-primary/5 hero-bg"></div>
@@ -17,7 +20,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Book Your Private Driver</span>
+            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">{t('cta.badge')}</span>
           </motion.div>
           
           <motion.h2 
@@ -27,7 +30,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            Hire a Professional Driver in Málaga Today
+            {t('cta.title')}
           </motion.h2>
           
           <motion.p 
@@ -37,7 +40,7 @@ const CtaSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Book your premium private driver service now and enjoy safe, reliable transportation with professional drivers throughout Málaga and Costa del Sol
+            {t('cta.description')}
           </motion.p>
           
           <motion.div
@@ -49,7 +52,7 @@ const CtaSection = () => {
           >
             <Button asChild size="lg" className="rounded-full shadow-lg hover-lift">
               <a href="#booking">
-                Book Your Private Driver <ArrowRight className="ml-2 h-4 w-4" />
+                {t('cta.button')} <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </Button>
           </motion.div>

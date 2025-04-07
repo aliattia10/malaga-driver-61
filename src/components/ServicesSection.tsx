@@ -2,41 +2,44 @@
 import { motion } from 'framer-motion';
 import { Car, Calendar, Globe, UserCheck, Clock, Headphones } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-const services = [
-  {
-    icon: <Car className="h-10 w-10" />,
-    title: "Airport Transfers Málaga",
-    description: "Professional driver services for reliable pickup and drop-off at Málaga Airport. We track your flight to ensure we're there when you arrive.",
-  },
-  {
-    icon: <Calendar className="h-10 w-10" />,
-    title: "Private Day Trips",
-    description: "Hire a private driver for day trips across Andalusia with knowledgeable local drivers who know the best routes and hidden gems.",
-  },
-  {
-    icon: <Globe className="h-10 w-10" />,
-    title: "Custom Sightseeing Tours",
-    description: "Book personalized sightseeing tours with a private driver around Málaga and Costa del Sol to visit historical sites and beaches.",
-  },
-  {
-    icon: <UserCheck className="h-10 w-10" />,
-    title: "Corporate Transportation",
-    description: "Professional driver services for business meetings, conferences, and corporate events throughout the Málaga region.",
-  },
-  {
-    icon: <Clock className="h-10 w-10" />,
-    title: "Hourly Driver Hire",
-    description: "Flexible hourly booking options when you need to hire a private driver for a few hours or for the whole day in Málaga.",
-  },
-  {
-    icon: <Headphones className="h-10 w-10" />,
-    title: "24/7 Driver Support",
-    description: "Around-the-clock customer service to assist with any questions or changes to your private driver booking in Málaga.",
-  },
-];
+import { useLanguage } from '@/hooks/useLanguage';
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      icon: <Car className="h-10 w-10" />,
+      title: t('services.airport_transfers.title'),
+      description: t('services.airport_transfers.description'),
+    },
+    {
+      icon: <Calendar className="h-10 w-10" />,
+      title: t('services.day_trips.title'),
+      description: t('services.day_trips.description'),
+    },
+    {
+      icon: <Globe className="h-10 w-10" />,
+      title: t('services.custom_tours.title'),
+      description: t('services.custom_tours.description'),
+    },
+    {
+      icon: <UserCheck className="h-10 w-10" />,
+      title: t('services.corporate.title'),
+      description: t('services.corporate.description'),
+    },
+    {
+      icon: <Clock className="h-10 w-10" />,
+      title: t('services.hourly.title'),
+      description: t('services.hourly.description'),
+    },
+    {
+      icon: <Headphones className="h-10 w-10" />,
+      title: t('services.support.title'),
+      description: t('services.support.description'),
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -62,12 +65,12 @@ const ServicesSection = () => {
     <section id="services" className="py-24">
       <div className="container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">Our Driver Services</span>
+          <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">{t('services.badge')}</span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Professional Private Driver Services in Málaga
+            {t('services.title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Hire experienced drivers for a range of professional transportation services tailored to your needs
+            {t('services.subtitle')}
           </p>
         </div>
         
