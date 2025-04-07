@@ -3,7 +3,15 @@ import { MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const WhatsAppButton = () => {
-  const { t } = useLanguage();
+  // Try to access the language context, with fallback to prevent errors
+  let translatedText = "Contact us now";
+  try {
+    const { t } = useLanguage();
+    translatedText = t('whatsapp.contact_now');
+  } catch (error) {
+    console.log("Language provider not available yet for WhatsAppButton");
+  }
+  
   const phoneNumber = "+34620173295"; // Remove spaces for the actual WhatsApp link
   
   return (
@@ -15,7 +23,7 @@ const WhatsAppButton = () => {
       aria-label="Contact via WhatsApp"
     >
       <MessageCircle className="h-8 w-8" />
-      <span className="hidden md:inline font-medium">{t('whatsapp.contact_now')}</span>
+      <span className="hidden md:inline font-medium">{translatedText}</span>
     </a>
   );
 };
