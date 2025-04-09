@@ -1,7 +1,9 @@
 
 import { Phone, Mail, MapPin, Facebook, Twitter, Instagram, Clock } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   
   return (
@@ -13,7 +15,7 @@ const Footer = () => {
               <span className="text-primary">Málaga</span> Driver Hub
             </h3>
             <p className="text-muted-foreground mb-6">
-              Premium private driver services in Málaga and Costa del Sol. Professional, reliable, and comfortable transportation.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a 
@@ -41,28 +43,28 @@ const Footer = () => {
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.services')}</h4>
             <ul className="space-y-3">
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Airport Transfers</a>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.airport_transfers')}</a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Day Trips</a>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.day_trips')}</a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Sightseeing Tours</a>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.sightseeing')}</a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Corporate Services</a>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.corporate')}</a>
               </li>
               <li>
-                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">Hourly Hire</a>
+                <a href="#services" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.hourly_hire')}</a>
               </li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.contact_us')}</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Phone className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
@@ -74,30 +76,30 @@ const Footer = () => {
               </li>
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
-                <span className="text-muted-foreground">Av. del Comandante García Morato s/n, Churriana, 29004 Málaga, Andalucía, España</span>
+                <span className="text-muted-foreground">{t('footer.address_value')}</span>
               </li>
             </ul>
           </div>
           
           <div>
-            <h4 className="text-lg font-semibold mb-4">Business Hours</h4>
+            <h4 className="text-lg font-semibold mb-4">{t('footer.business_hours')}</h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Clock className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium">Monday - Friday</p>
-                  <p className="text-muted-foreground">8:00 AM - 8:00 PM</p>
+                  <p className="font-medium">{t('footer.weekdays')}</p>
+                  <p className="text-muted-foreground">{t('footer.weekday_hours')}</p>
                 </div>
               </li>
               <li className="flex items-start">
                 <Clock className="w-5 h-5 mr-3 text-primary flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="font-medium">Saturday - Sunday</p>
-                  <p className="text-muted-foreground">9:00 AM - 6:00 PM</p>
+                  <p className="font-medium">{t('footer.weekends')}</p>
+                  <p className="text-muted-foreground">{t('footer.weekend_hours')}</p>
                 </div>
               </li>
               <li className="text-sm mt-4 text-muted-foreground">
-                <p>24/7 service available for pre-booked airport transfers and special requests.</p>
+                <p>{t('footer.special_hours')}</p>
               </li>
             </ul>
           </div>
@@ -106,12 +108,12 @@ const Footer = () => {
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-              &copy; {currentYear} Málaga Driver Hub. All rights reserved.
+              &copy; {currentYear} Málaga Driver Hub. {t('footer.copyright')}
             </p>
             <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Cookies</a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.terms')}</a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.privacy')}</a>
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors">{t('footer.cookies')}</a>
             </div>
           </div>
         </div>

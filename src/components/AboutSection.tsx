@@ -2,8 +2,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { ShieldCheck, Clock, Users, Map } from 'lucide-react';
+import { useLanguage } from '@/hooks/useLanguage';
 
 const AboutSection = () => {
+  const { t } = useLanguage();
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -16,23 +18,23 @@ const AboutSection = () => {
   const benefits = [
     {
       icon: <ShieldCheck className="h-6 w-6" />,
-      title: "Safe Private Drivers",
-      description: "All our private drivers undergo rigorous background checks and our vehicles are regularly maintained for your safety.",
+      title: t('about.benefits.safe_drivers.title'),
+      description: t('about.benefits.safe_drivers.description'),
     },
     {
       icon: <Clock className="h-6 w-6" />,
-      title: "Punctual Service",
-      description: "Our professional drivers pride themselves on being on time, every time. We monitor flight arrivals and traffic conditions.",
+      title: t('about.benefits.punctual.title'),
+      description: t('about.benefits.punctual.description'),
     },
     {
       icon: <Users className="h-6 w-6" />,
-      title: "Local Driver Expertise",
-      description: "Hire local drivers who know Málaga inside out and can offer valuable insights about the area during your journey.",
+      title: t('about.benefits.expertise.title'),
+      description: t('about.benefits.expertise.description'),
     },
     {
       icon: <Map className="h-6 w-6" />,
-      title: "Custom Transportation",
-      description: "We customize our transportation services according to your needs, whether you need airport transfers or a scenic drive.",
+      title: t('about.benefits.custom.title'),
+      description: t('about.benefits.custom.description'),
     },
   ];
   
@@ -41,19 +43,19 @@ const AboutSection = () => {
       <div className="container px-4 mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">About Our Driver Services</span>
+            <span className="inline-block py-1 px-3 mb-4 text-xs font-medium uppercase tracking-wider text-primary-foreground bg-primary rounded-full">{t('about.badge')}</span>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Premium Transportation Services in Málaga & Costa del Sol
+              {t('about.title')}
             </h2>
             <div className="prose max-w-none mb-8">
               <p className="text-lg mb-4">
-                Málaga Driver Hub is a premium private driver service dedicated to providing reliable, comfortable, and professional transportation services in Málaga and throughout Costa del Sol.
+                {t('about.description.first')}
               </p>
               <p className="mb-4">
-                Founded with a passion for exceptional service, we combine our deep knowledge of the region with a commitment to customer satisfaction. Our team of experienced drivers ensures a smooth and enjoyable journey when you hire a private driver in Málaga.
+                {t('about.description.second')}
               </p>
               <p>
-                With a fleet of well-maintained vehicles and professional drivers who speak multiple languages, we cater to international visitors and local residents alike. We take pride in our attention to detail and personalized approach to meet each client's unique transportation needs.
+                {t('about.description.third')}
               </p>
             </div>
             
@@ -96,12 +98,12 @@ const AboutSection = () => {
               <div className="absolute bottom-8 left-8 right-8">
                 <div className="glass-panel p-4 rounded-lg">
                   <p className="text-sm md:text-base font-medium">
-                    Experience the beautiful coastline and cultural richness of Málaga with professional drivers who truly know the region.
+                    {t('about.image_caption')}
                   </p>
                   <div className="mt-4">
                     <img 
                       src="https://images.unsplash.com/photo-1544642899-f0d6e5f6ed6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
-                      alt="Professional Málaga driver showing tourists local attractions" 
+                      alt={t('about.image_alt')} 
                       className="w-full h-32 object-cover rounded-md"
                     />
                   </div>

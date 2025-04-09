@@ -1,4 +1,3 @@
-
 const translations = {
   en: {
     navbar: {
@@ -85,22 +84,54 @@ const translations = {
       }
     },
     about: {
-      title: "About Us",
-      subtitle: "Expert drivers with extensive local knowledge",
-      description: "Experience the beautiful coastline and cultural richness of Málaga with professional drivers who truly know the region.",
-      features: {
-        experience: "Years of Experience",
-        safety: "Safety First Approach",
-        knowledge: "Local Knowledge & Expertise",
-        service: "Personalized Service"
-      }
+      badge: "About Our Driver Services",
+      title: "Premium Transportation Services in Málaga & Costa del Sol",
+      description: {
+        first: "Málaga Driver Hub is a premium private driver service dedicated to providing reliable, comfortable, and professional transportation services in Málaga and throughout Costa del Sol.",
+        second: "Founded with a passion for exceptional service, we combine our deep knowledge of the region with a commitment to customer satisfaction. Our team of experienced drivers ensures a smooth and enjoyable journey when you hire a private driver in Málaga.",
+        third: "With a fleet of well-maintained vehicles and professional drivers who speak multiple languages, we cater to international visitors and local residents alike. We take pride in our attention to detail and personalized approach to meet each client's unique transportation needs."
+      },
+      benefits: {
+        safe_drivers: {
+          title: "Safe Private Drivers",
+          description: "All our private drivers undergo rigorous background checks and our vehicles are regularly maintained for your safety."
+        },
+        punctual: {
+          title: "Punctual Service",
+          description: "Our professional drivers pride themselves on being on time, every time. We monitor flight arrivals and traffic conditions."
+        },
+        expertise: {
+          title: "Local Driver Expertise",
+          description: "Hire local drivers who know Málaga inside out and can offer valuable insights about the area during your journey."
+        },
+        custom: {
+          title: "Custom Transportation",
+          description: "We customize our transportation services according to your needs, whether you need airport transfers or a scenic drive."
+        }
+      },
+      image_caption: "Experience the beautiful coastline and cultural richness of Málaga with professional drivers who truly know the region.",
+      image_alt: "Professional Málaga driver showing tourists local attractions"
     },
     footer: {
-      contact: "Contact Us",
-      address: "Address",
-      phone: "Phone",
-      email: "Email",
-      copyright: "© 2023 Málaga Driver Hub. All rights reserved."
+      description: "Premium private driver services in Málaga and Costa del Sol. Professional, reliable, and comfortable transportation.",
+      services: "Services",
+      airport_transfers: "Airport Transfers",
+      day_trips: "Day Trips",
+      sightseeing: "Sightseeing Tours",
+      corporate: "Corporate Services",
+      hourly_hire: "Hourly Hire",
+      contact_us: "Contact Us",
+      address_value: "Av. del Comandante García Morato s/n, Churriana, 29004 Málaga, Andalucía, España",
+      business_hours: "Business Hours",
+      weekdays: "Monday - Friday",
+      weekday_hours: "8:00 AM - 8:00 PM",
+      weekends: "Saturday - Sunday",
+      weekend_hours: "9:00 AM - 6:00 PM",
+      special_hours: "24/7 service available for pre-booked airport transfers and special requests.",
+      copyright: "© 2023 Málaga Driver Hub. All rights reserved.",
+      terms: "Terms of Service",
+      privacy: "Privacy Policy",
+      cookies: "Cookies"
     },
     whatsapp: {
       message: "Contact us via WhatsApp",
@@ -202,22 +233,54 @@ const translations = {
       }
     },
     about: {
-      title: "Sobre Nosotros",
-      subtitle: "Conductores expertos con amplio conocimiento local",
-      description: "Experimente la hermosa costa y la riqueza cultural de Málaga con conductores profesionales que realmente conocen la región.",
-      features: {
-        experience: "Años de Experiencia",
-        safety: "Enfoque de Seguridad Primero",
-        knowledge: "Conocimiento Local y Experiencia",
-        service: "Servicio Personalizado"
-      }
+      badge: "Sobre Nuestros Servicios de Conductor",
+      title: "Servicios de Transporte Premium en Málaga y Costa del Sol",
+      description: {
+        first: "Málaga Driver Hub es un servicio premium de conductor privado dedicado a proporcionar servicios de transporte confiables, cómodos y profesionales en Málaga y en toda la Costa del Sol.",
+        second: "Fundado con pasión por el servicio excepcional, combinamos nuestro profundo conocimiento de la región con un compromiso con la satisfacción del cliente. Nuestro equipo de conductores experimentados garantiza un viaje suave y agradable cuando contrata un conductor privado en Málaga.",
+        third: "Con una flota de vehículos bien mantenidos y conductores profesionales que hablan múltiples idiomas, atendemos tanto a visitantes internacionales como a residentes locales. Nos enorgullecemos de nuestra atención al detalle y enfoque personalizado para satisfacer las necesidades únicas de transporte de cada cliente."
+      },
+      benefits: {
+        safe_drivers: {
+          title: "Conductores Privados Seguros",
+          description: "Todos nuestros conductores privados se someten a rigurosas verificaciones de antecedentes y nuestros vehículos son mantenidos regularmente para su seguridad."
+        },
+        punctual: {
+          title: "Servicio Puntual",
+          description: "Nuestros conductores profesionales se enorgullecen de ser puntuales, siempre. Monitoreamos las llegadas de vuelos y las condiciones del tráfico."
+        },
+        expertise: {
+          title: "Experiencia de Conductores Locales",
+          description: "Contrate conductores locales que conocen Málaga a fondo y pueden ofrecer valiosos conocimientos sobre la zona durante su viaje."
+        },
+        custom: {
+          title: "Transporte Personalizado",
+          description: "Personalizamos nuestros servicios de transporte de acuerdo con sus necesidades, ya sea que necesite traslados al aeropuerto o un recorrido panorámico."
+        }
+      },
+      image_caption: "Experimente la hermosa costa y la riqueza cultural de Málaga con conductores profesionales que realmente conocen la región.",
+      image_alt: "Conductor profesional de Málaga mostrando atracciones locales a turistas"
     },
     footer: {
-      contact: "Contáctenos",
-      address: "Dirección",
-      phone: "Teléfono",
-      email: "Correo Electrónico",
-      copyright: "© 2023 Málaga Driver Hub. Todos los derechos reservados."
+      description: "Servicios premium de conductor privado en Málaga y Costa del Sol. Transporte profesional, confiable y cómodo.",
+      services: "Servicios",
+      airport_transfers: "Traslados al Aeropuerto",
+      day_trips: "Excursiones Diarias",
+      sightseeing: "Tours Turísticos",
+      corporate: "Servicios Corporativos",
+      hourly_hire: "Contratación por Horas",
+      contact_us: "Contáctenos",
+      address_value: "Av. del Comandante García Morato s/n, Churriana, 29004 Málaga, Andalucía, España",
+      business_hours: "Horario de Atención",
+      weekdays: "Lunes - Viernes",
+      weekday_hours: "8:00 AM - 8:00 PM",
+      weekends: "Sábado - Domingo",
+      weekend_hours: "9:00 AM - 6:00 PM",
+      special_hours: "Servicio 24/7 disponible para traslados al aeropuerto pre-reservados y solicitudes especiales.",
+      copyright: "Todos los derechos reservados.",
+      terms: "Términos de Servicio",
+      privacy: "Política de Privacidad",
+      cookies: "Cookies"
     },
     whatsapp: {
       message: "Contáctanos por WhatsApp",
