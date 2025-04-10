@@ -22,7 +22,6 @@ import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { GoogleSheetsService } from '@/services/GoogleSheetsService';
-import GoogleSheetsConfig from '@/components/GoogleSheetsConfig';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const locations = [
@@ -119,10 +118,6 @@ const BookingForm = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t('booking.subtitle')}
           </h2>
-          
-          <div className="hidden">
-            <GoogleSheetsConfig />
-          </div>
         </div>
         
         <div className="max-w-4xl mx-auto">

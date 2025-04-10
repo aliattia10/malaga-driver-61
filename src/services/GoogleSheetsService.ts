@@ -15,7 +15,7 @@ export interface BookingData {
 }
 
 export class GoogleSheetsService {
-  private static webhookUrl: string | null = null;
+  private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbz6FGKEsQuF3vSwyrc7HF4gvhaUje5yq1Vo0UXT4UeczJHLz0RfasDTlG0kbivaaZ-O/exec";
   private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
 
   // Get the spreadsheet URL
@@ -29,13 +29,17 @@ export class GoogleSheetsService {
     this.webhookUrl = url;
   }
 
-  // Get the webhook URL from localStorage
+  // Get the webhook URL from localStorage or use the default
   static getWebhookUrl(): string | null {
     if (this.webhookUrl) return this.webhookUrl;
     
     const url = localStorage.getItem('google_sheets_webhook_url');
-    this.webhookUrl = url;
-    return url;
+    if (url) {
+      this.webhookUrl = url;
+      return url;
+    }
+    
+    return this.webhookUrl; // Return the default webhook URL
   }
 
   // Submit booking data to Google Sheets via the webhook
