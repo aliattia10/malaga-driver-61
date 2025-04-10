@@ -119,9 +119,6 @@ const BookingForm = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             {t('booking.subtitle')}
           </h2>
-          <p className="text-lg text-muted-foreground">
-            {t('booking.form.description')}
-          </p>
           
           <div className="hidden">
             <GoogleSheetsConfig />
