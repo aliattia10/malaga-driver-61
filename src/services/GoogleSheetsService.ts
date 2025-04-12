@@ -15,7 +15,7 @@ export interface BookingData {
 }
 
 export class GoogleSheetsService {
-  private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbz6BwlJG7_t7Sfp31l6e5cftpkNGwSi7bFTcE4k_AUU0COBtuSQzu7WsIxYcsGtwnyj/exec";
+  private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbyiJhDNOPneIrll_uan3MTI6YC30jMGRz_aI_wagfAZ2Ju8vNOyZDgc8WICVqg4g39P/exec";
   private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
 
   // Get the spreadsheet URL
