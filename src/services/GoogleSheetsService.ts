@@ -20,7 +20,7 @@ export interface BookingData {
 export class GoogleSheetsService {
   private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbwyL3Dnp9grtLfcfejpU1dBez1pGfvZVqu21TKUYfUuq6ZloFBfddCXPdxL9EyQBzW1/exec";
   private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1UrcM2WzKwhnitsuC7wweYpW1qH02ro3eZ3dxOD_hvJg/edit?usp=sharing";
-  private static sheetName: string = "lista de clientes"; // Updated default sheet name based on the error message
+  private static sheetName: string = "Lista de Clientes"; // Updated sheet name based on the screenshot
 
   // Get the spreadsheet URL
   static getSpreadsheetUrl(): string {
@@ -93,8 +93,11 @@ export class GoogleSheetsService {
       sheetName: this.getSheetName() // Send the sheet name to the Apps Script
     };
 
+    // ***** ADDED THIS LINE FOR DEBUGGING *****
+    console.log("Submitting booking data to Google Sheets:", JSON.stringify(formattedData, null, 2));
+
     try {
-      console.log('Sending booking data to Google Sheets:', formattedData);
+      console.log('Sending booking data to Google Sheets with sheet name:', this.getSheetName());
       
       const response = await fetch(webhookUrl, {
         method: 'POST',
@@ -105,6 +108,8 @@ export class GoogleSheetsService {
       try {
         // Try to parse the response as JSON first
         const resultText = await response.text();
+        console.log('Raw response from Google Sheets:', resultText);
+        
         const result = JSON.parse(resultText);
         console.log('Google Sheets response:', result);
 
@@ -115,9 +120,11 @@ export class GoogleSheetsService {
           };
         } else if (result.message && result.message.includes("Sheet")) {
           // Handle sheet name error specifically
+          const errorDetails = `Sheet configuration issue: ${result.message}. Sheet name used: "${this.getSheetName()}"`;
+          console.error(errorDetails);
           return { 
             success: false, 
-            message: `Sheet configuration issue: ${result.message}. Your booking is still confirmed, but please update the sheet name in settings.`
+            message: `${errorDetails} Your booking is still confirmed, but please update the sheet name in settings.`
           };
         } else {
           return { 

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -92,7 +93,32 @@ const BookingForm = () => {
       customDropoffLocation: formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : ''
     };
     
-    console.log("Booking data to be sent:", bookingData);
+    // ***** ADDED THIS LINE FOR DEBUGGING *****
+    console.log("Booking data to be sent:", JSON.stringify(bookingData, null, 2));
+    
+    // Verify data exists before sending
+    if (!bookingData.pickupLocation || !bookingData.dropoffLocation || 
+        !bookingData.dateTime || !bookingData.name || 
+        !bookingData.email || !bookingData.phone) {
+      
+      console.error("Missing required booking data:", 
+        !bookingData.pickupLocation ? "pickup location is missing" : "",
+        !bookingData.dropoffLocation ? "dropoff location is missing" : "",
+        !bookingData.dateTime ? "date/time is missing" : "",
+        !bookingData.name ? "name is missing" : "",
+        !bookingData.email ? "email is missing" : "",
+        !bookingData.phone ? "phone is missing" : ""
+      );
+      
+      toast({
+        title: "Form Error",
+        description: "Please fill in all required fields before submitting.",
+        variant: "destructive",
+      });
+      
+      setIsSubmitting(false);
+      return;
+    }
     
     try {
       const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);

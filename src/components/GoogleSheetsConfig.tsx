@@ -124,12 +124,12 @@ const GoogleSheetsConfig = () => {
                     id="sheet-name"
                     value={sheetName}
                     onChange={(e) => setSheetName(e.target.value)}
-                    placeholder="lista de clientes"
+                    placeholder="Lista de Clientes"
                     className="w-full"
                   />
                   <p className="text-xs text-muted-foreground">
                     <FileSpreadsheet className="h-3 w-3 inline mr-1" />
-                    The exact name of the sheet tab in your Google Spreadsheet (default: "lista de clientes")
+                    The exact name of the sheet tab in your Google Spreadsheet (default: "Lista de Clientes")
                   </p>
                 </div>
                 
