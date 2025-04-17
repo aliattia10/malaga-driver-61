@@ -124,19 +124,19 @@ const GoogleSheetsConfig = () => {
                     id="sheet-name"
                     value={sheetName}
                     onChange={(e) => setSheetName(e.target.value)}
-                    placeholder="Bookings"
+                    placeholder="lista de clientes"
                     className="w-full"
                   />
                   <p className="text-xs text-muted-foreground">
                     <FileSpreadsheet className="h-3 w-3 inline mr-1" />
-                    The exact name of the sheet tab in your Google Spreadsheet (default: "Bookings")
+                    The exact name of the sheet tab in your Google Spreadsheet (default: "lista de clientes")
                   </p>
                 </div>
                 
-                <div className="space-y-2 text-sm text-muted-foreground">
+                <div className="bg-amber-50 dark:bg-amber-950/20 text-amber-800 dark:text-amber-300 rounded-md p-3 text-sm">
                   <p className="flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4 text-amber-500" />
-                    <span>This webhook URL should point to your Google Apps Script</span>
+                    <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                    <span>Sheet configuration issue: Sheet "lista de clientes" not found. Please check the SHEET_NAME variable.</span>
                   </p>
                 </div>
               </div>
