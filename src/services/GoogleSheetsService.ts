@@ -19,7 +19,7 @@ export interface BookingData {
 
 export class GoogleSheetsService {
   private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbwyL3Dnp9grtLfcfejpU1dBez1pGfvZVqu21TKUYfUuq6ZloFBfddCXPdxL9EyQBzW1/exec";
-  private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
+  private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1UrcM2WzKwhnitsuC7wweYpW1qH02ro3eZ3dxOD_hvJg/edit?usp=sharing";
   private static sheetName: string = "Bookings"; // Default sheet name
 
   // Get the spreadsheet URL
