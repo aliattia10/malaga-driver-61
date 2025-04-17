@@ -12,10 +12,13 @@ export interface BookingData {
   phone: string;
   specialRequests?: string;
   submittedAt: string;
+  // Optional custom location fields
+  customPickupLocation?: string;
+  customDropoffLocation?: string;
 }
 
 export class GoogleSheetsService {
-  private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbyiJhDNOPneIrll_uan3MTI6YC30jMGRz_aI_wagfAZ2Ju8vNOyZDgc8WICVqg4g39P/exec";
+  private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbwyL3Dnp9grtLfcfejpU1dBez1pGfvZVqu21TKUYfUuq6ZloFBfddCXPdxL9EyQBzW1/exec";
   private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
 
   // Get the spreadsheet URL
@@ -54,29 +57,84 @@ export class GoogleSheetsService {
       };
     }
 
+    // Format the data according to what the Apps Script expects
+    const formattedData = {
+      pickupLocation: bookingData.pickupLocation,
+      customPickupLocation: bookingData.customPickupLocation || '',
+      dropoffLocation: bookingData.dropoffLocation,
+      customDropoffLocation: bookingData.customDropoffLocation || '',
+      passengers: bookingData.passengers,
+      // Extract date and time from the combined dateTime field
+      date: bookingData.dateTime.split('T')[0],
+      time: bookingData.dateTime.split('T')[1],
+      name: bookingData.name,
+      email: bookingData.email,
+      phone: bookingData.phone,
+      specialRequests: bookingData.specialRequests || 'None',
+      submittedAt: bookingData.submittedAt
+    };
+
     try {
+      console.log('Sending booking data to Google Sheets:', formattedData);
+      
       const response = await fetch(webhookUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'no-cors', // Required for some webhook services
-        body: JSON.stringify(bookingData),
+        body: JSON.stringify(formattedData),
+        // No-cors mode is now optional, try first without it
       });
 
-      // Since we're using no-cors, we can't reliably check the status
-      // We'll assume it worked if no exception was thrown
-      console.log('Booking data sent to Google Sheets');
-      return { 
-        success: true, 
-        message: 'Booking data saved to Google Sheets successfully'
-      };
+      try {
+        // Try to parse the response as JSON first
+        const resultText = await response.text();
+        const result = JSON.parse(resultText);
+        console.log('Google Sheets response:', result);
+
+        if (result.result === "success") {
+          return { 
+            success: true, 
+            message: 'Booking data saved to Google Sheets successfully. Check your email for confirmation.'
+          };
+        } else {
+          return { 
+            success: false, 
+            message: `Failed to save to Google Sheets: ${result.message || 'Unknown error'}`
+          };
+        }
+      } catch (parseError) {
+        // Fallback for when response is not valid JSON (common with no-cors)
+        console.log('Response could not be parsed as JSON, assuming success');
+        return { 
+          success: true, 
+          message: 'Booking data sent to Google Sheets. Check your email for confirmation.'
+        };
+      }
     } catch (error) {
       console.error('Error sending booking data to Google Sheets:', error);
-      return { 
-        success: false, 
-        message: 'Failed to save to Google Sheets. Your booking is still confirmed.'
-      };
+      
+      // If the initial request failed, try again with no-cors mode
+      try {
+        console.log('Retrying with no-cors mode...');
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain',
+          },
+          mode: 'no-cors',
+          body: JSON.stringify(formattedData),
+        });
+        
+        // Since no-cors doesn't provide a readable response, assume it worked
+        return { 
+          success: true, 
+          message: 'Booking data sent to Google Sheets (no-cors fallback). Check your email for confirmation.'
+        };
+      } catch (fallbackError) {
+        console.error('Error in no-cors fallback:', fallbackError);
+        return { 
+          success: false, 
+          message: 'Failed to save to Google Sheets after multiple attempts. Your booking is still confirmed.'
+        };
+      }
     }
   }
 }

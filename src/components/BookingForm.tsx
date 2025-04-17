@@ -65,6 +65,7 @@ const BookingForm = () => {
   });
   
   const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleChange = (field: string, value: string | Date) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -75,13 +76,20 @@ const BookingForm = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
     const bookingData = {
-      ...formData,
       pickupLocation: formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : formData.pickupLocation,
       dropoffLocation: formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : formData.dropoffLocation,
       dateTime: `${format(formData.date, 'yyyy-MM-dd')}T${formData.time}`,
-      submittedAt: new Date().toISOString()
+      passengers: formData.passengers,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      specialRequests: formData.specialRequests,
+      submittedAt: new Date().toISOString(),
+      customPickupLocation: formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : '',
+      customDropoffLocation: formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : ''
     };
     
     console.log("Booking data to be sent:", bookingData);
@@ -89,13 +97,10 @@ const BookingForm = () => {
     try {
       const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);
       
-      if (!sheetsResult.success) {
-        console.log("Google Sheets submission note:", sheetsResult.message);
-      }
-      
       toast({
-        title: "Booking Submitted",
-        description: "We've received your booking request. We'll contact you shortly to confirm your reservation.",
+        title: sheetsResult.success ? "Booking Submitted" : "Booking Submitted with Note",
+        description: sheetsResult.message || "We've received your booking request. We'll contact you shortly to confirm your reservation.",
+        variant: sheetsResult.success ? "default" : "destructive",
       });
       
       navigate('/booking-confirmation', { state: { bookingData } });
@@ -107,6 +112,8 @@ const BookingForm = () => {
         description: "There was a problem submitting your booking. Please try again or contact us directly.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -433,9 +440,15 @@ const BookingForm = () => {
                     <Button 
                       type="submit" 
                       className="rounded-lg"
-                      disabled={!formData.name || !formData.email || !formData.phone}
+                      disabled={!formData.name || !formData.email || !formData.phone || isSubmitting}
                     >
-                      <Send className="mr-2 h-4 w-4" /> Confirm Booking
+                      {isSubmitting ? (
+                        <>Submitting...</>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" /> Confirm Booking
+                        </>
+                      )}
                     </Button>
                   </div>
                 </motion.div>
