@@ -1,17 +1,38 @@
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, AlertCircle, Settings } from 'lucide-react';
 import { format } from 'date-fns';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
+import { useToast } from '@/components/ui/use-toast';
+import { useEffect } from 'react';
 
 const BookingConfirmation = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { toast } = useToast();
   const bookingData = location.state?.bookingData;
+  const submissionStatus = location.state?.submissionStatus;
+  
+  useEffect(() => {
+    // Show a toast if there was an error submitting to Google Sheets
+    if (submissionStatus && !submissionStatus.success) {
+      toast({
+        title: "Note about Google Sheets",
+        description: submissionStatus.message,
+        variant: "default",
+        action: submissionStatus.message.includes("sheet name") ? (
+          <Button variant="outline" size="sm" onClick={() => navigate('/admin/settings')}>
+            <Settings className="h-4 w-4 mr-1" />
+            Settings
+          </Button>
+        ) : undefined
+      });
+    }
+  }, [submissionStatus, toast, navigate]);
   
   if (!bookingData) {
     return (

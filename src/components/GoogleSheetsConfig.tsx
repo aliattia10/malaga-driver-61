@@ -6,20 +6,28 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { GoogleSheetsService } from '@/services/GoogleSheetsService';
 import { useToast } from '@/components/ui/use-toast';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { BookOpen, Check, AlertCircle, Link2, ExternalLink } from 'lucide-react';
+import { BookOpen, Check, AlertCircle, Link2, ExternalLink, FileSpreadsheet } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 
 const GoogleSheetsConfig = () => {
   const { toast } = useToast();
   const [webhookUrl, setWebhookUrl] = useState('');
+  const [sheetName, setSheetName] = useState('');
   const [isConfigured, setIsConfigured] = useState(false);
   const spreadsheetUrl = GoogleSheetsService.getSpreadsheetUrl();
 
   useEffect(() => {
+    // Load saved values
     const savedUrl = GoogleSheetsService.getWebhookUrl();
+    const savedSheetName = GoogleSheetsService.getSheetName();
+    
     if (savedUrl) {
       setWebhookUrl(savedUrl);
       setIsConfigured(true);
+    }
+    
+    if (savedSheetName) {
+      setSheetName(savedSheetName);
     }
   }, []);
 
@@ -34,10 +42,15 @@ const GoogleSheetsConfig = () => {
     }
 
     GoogleSheetsService.saveWebhookUrl(webhookUrl);
+    
+    if (sheetName) {
+      GoogleSheetsService.saveSheetName(sheetName);
+    }
+    
     setIsConfigured(true);
     
     toast({
-      title: "Webhook Saved",
+      title: "Configuration Saved",
       description: "Google Sheets integration has been configured",
       action: (
         <div className="h-8 w-8 bg-green-500 rounded-full flex items-center justify-center">
@@ -105,6 +118,21 @@ const GoogleSheetsConfig = () => {
                   />
                 </div>
                 
+                <div className="space-y-2">
+                  <Label htmlFor="sheet-name">Sheet Name</Label>
+                  <Input
+                    id="sheet-name"
+                    value={sheetName}
+                    onChange={(e) => setSheetName(e.target.value)}
+                    placeholder="Bookings"
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    <FileSpreadsheet className="h-3 w-3 inline mr-1" />
+                    The exact name of the sheet tab in your Google Spreadsheet (default: "Bookings")
+                  </p>
+                </div>
+                
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <p className="flex items-center gap-2">
                     <AlertCircle className="h-4 w-4 text-amber-500" />
@@ -119,7 +147,7 @@ const GoogleSheetsConfig = () => {
                   onClick={handleSaveWebhook}
                   className="w-full"
                 >
-                  Save Webhook Configuration
+                  Save Configuration
                 </Button>
                 <Button
                   variant="outline"

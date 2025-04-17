@@ -97,13 +97,20 @@ const BookingForm = () => {
     try {
       const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);
       
-      toast({
-        title: sheetsResult.success ? "Booking Submitted" : "Booking Submitted with Note",
-        description: sheetsResult.message || "We've received your booking request. We'll contact you shortly to confirm your reservation.",
-        variant: sheetsResult.success ? "default" : "destructive",
-      });
+      if (!sheetsResult.success) {
+        toast({
+          title: "Note About Your Booking",
+          description: sheetsResult.message || "Your booking has been confirmed, but there was an issue with the Google Sheets integration.",
+          variant: "default",
+        });
+      }
       
-      navigate('/booking-confirmation', { state: { bookingData } });
+      navigate('/booking-confirmation', { 
+        state: { 
+          bookingData,
+          submissionStatus: sheetsResult
+        } 
+      });
       
     } catch (error) {
       console.error("Error submitting booking:", error);
@@ -112,7 +119,6 @@ const BookingForm = () => {
         description: "There was a problem submitting your booking. Please try again or contact us directly.",
         variant: "destructive",
       });
-    } finally {
       setIsSubmitting(false);
     }
   };

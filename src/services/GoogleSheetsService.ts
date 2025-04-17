@@ -20,6 +20,7 @@ export interface BookingData {
 export class GoogleSheetsService {
   private static webhookUrl: string | null = "https://script.google.com/macros/s/AKfycbwyL3Dnp9grtLfcfejpU1dBez1pGfvZVqu21TKUYfUuq6ZloFBfddCXPdxL9EyQBzW1/exec";
   private static spreadsheetUrl: string = "https://docs.google.com/spreadsheets/d/1enm43ab3pgahkPWeWRh1ZasfCm5EQ5zCuKvR5spdydA/edit?usp=sharing";
+  private static sheetName: string = "Bookings"; // Default sheet name
 
   // Get the spreadsheet URL
   static getSpreadsheetUrl(): string {
@@ -43,6 +44,23 @@ export class GoogleSheetsService {
     }
     
     return this.webhookUrl; // Return the default webhook URL
+  }
+
+  // Save the sheet name to localStorage
+  static saveSheetName(name: string): void {
+    localStorage.setItem('google_sheets_sheet_name', name);
+    this.sheetName = name;
+  }
+
+  // Get the sheet name from localStorage or use the default
+  static getSheetName(): string {
+    const name = localStorage.getItem('google_sheets_sheet_name');
+    if (name) {
+      this.sheetName = name;
+      return name;
+    }
+    
+    return this.sheetName; // Return the default sheet name
   }
 
   // Submit booking data to Google Sheets via the webhook
@@ -71,7 +89,8 @@ export class GoogleSheetsService {
       email: bookingData.email,
       phone: bookingData.phone,
       specialRequests: bookingData.specialRequests || 'None',
-      submittedAt: bookingData.submittedAt
+      submittedAt: bookingData.submittedAt,
+      sheetName: this.getSheetName() // Send the sheet name to the Apps Script
     };
 
     try {
@@ -94,10 +113,16 @@ export class GoogleSheetsService {
             success: true, 
             message: 'Booking data saved to Google Sheets successfully. Check your email for confirmation.'
           };
+        } else if (result.message && result.message.includes("Sheet")) {
+          // Handle sheet name error specifically
+          return { 
+            success: false, 
+            message: `Sheet configuration issue: ${result.message}. Your booking is still confirmed, but please update the sheet name in settings.`
+          };
         } else {
           return { 
             success: false, 
-            message: `Failed to save to Google Sheets: ${result.message || 'Unknown error'}`
+            message: `Failed to save to Google Sheets: ${result.message || 'Unknown error'}. Your booking is still confirmed.`
           };
         }
       } catch (parseError) {
