@@ -21,7 +21,6 @@ import { Calendar as CalendarIcon, Clock, MapPin, Send } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { GoogleSheetsService } from '@/services/GoogleSheetsService';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const locations = [
@@ -90,7 +89,6 @@ const BookingForm = () => {
       submittedAt: new Date().toISOString()
     };
 
-    // Verify data exists before sending
     if (!bookingData.pickupLocation || !bookingData.dropoffLocation || 
         !bookingData.dateTime || !bookingData.name || 
         !bookingData.email || !bookingData.phone) {
@@ -106,7 +104,9 @@ const BookingForm = () => {
     }
     
     try {
-      const response = await fetch('https://hooks.zapier.com/hooks/catch/22554798/2p3rt3h/', {
+      const webhookUrl = localStorage.getItem('zapier_webhook_url') || 'https://hooks.zapier.com/hooks/catch/22554798/2p3rt3h/';
+      
+      const response = await fetch(webhookUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
