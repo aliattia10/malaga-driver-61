@@ -108,20 +108,16 @@ const BookingForm = () => {
     }
     
     try {
-      const webhookUrl = localStorage.getItem('zapier_webhook_url') || 'https://hooks.zapier.com/hooks/catch/22554798/2p3rt3h/';
+      const googleFormUrl = localStorage.getItem('google_form_url');
       
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'no-cors',
-        body: JSON.stringify(bookingData),
-      });
+      if (!googleFormUrl) {
+        throw new Error("Google Form URL not configured");
+      }
 
-      // Since we're using no-cors, we won't get a proper response status
-      // We'll just assume it worked and navigate, but in reality we should implement a proper
-      // confirmation mechanism when possible
+      // Open the Google Form in a new tab
+      window.open(googleFormUrl, '_blank');
+      
+      // Navigate to confirmation page with the booking data
       navigate('/booking-confirmation', { 
         state: { bookingData } 
       });

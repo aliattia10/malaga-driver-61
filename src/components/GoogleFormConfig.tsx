@@ -6,18 +6,18 @@ import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Check, AlertTriangle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
-const ZapierConfig = () => {
+const GoogleFormConfig = () => {
   const { toast } = useToast();
-  const [webhookUrl, setWebhookUrl] = useState('');
+  const [formUrl, setFormUrl] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [testData, setTestData] = useState({ success: false, message: '' });
   const [isTesting, setIsTesting] = useState(false);
   
-  // Load webhook URL from localStorage on component mount
+  // Load form URL from localStorage on component mount
   useEffect(() => {
-    const savedWebhookUrl = localStorage.getItem('zapier_webhook_url');
-    if (savedWebhookUrl) {
-      setWebhookUrl(savedWebhookUrl);
+    const savedFormUrl = localStorage.getItem('google_form_url');
+    if (savedFormUrl) {
+      setFormUrl(savedFormUrl);
     }
   }, []);
   
@@ -26,10 +26,10 @@ const ZapierConfig = () => {
     
     try {
       // Validate the URL
-      if (webhookUrl && !webhookUrl.startsWith('https://hooks.zapier.com/')) {
+      if (formUrl && !formUrl.includes('docs.google.com/forms')) {
         toast({
-          title: "Invalid Webhook URL",
-          description: "Please enter a valid Zapier webhook URL",
+          title: "Invalid Form URL",
+          description: "Please enter a valid Google Form URL",
           variant: "destructive"
         });
         setIsSaving(false);
@@ -37,14 +37,14 @@ const ZapierConfig = () => {
       }
       
       // Save to localStorage
-      localStorage.setItem('zapier_webhook_url', webhookUrl);
+      localStorage.setItem('google_form_url', formUrl);
       
       toast({
         title: "Settings Saved",
-        description: "Your Zapier webhook URL has been saved successfully"
+        description: "Your Google Form URL has been saved successfully"
       });
     } catch (error) {
-      console.error("Error saving webhook URL:", error);
+      console.error("Error saving form URL:", error);
       toast({
         title: "Error",
         description: "Failed to save settings",
@@ -56,60 +56,36 @@ const ZapierConfig = () => {
   };
   
   const handleClear = () => {
-    localStorage.removeItem('zapier_webhook_url');
-    setWebhookUrl('');
+    localStorage.removeItem('google_form_url');
+    setFormUrl('');
     setTestData({ success: false, message: '' });
     toast({
       title: "Settings Cleared",
-      description: "Your Zapier webhook URL has been cleared"
+      description: "Your Google Form URL has been cleared"
     });
   };
   
-  const handleTest = async () => {
-    if (!webhookUrl) {
+  const handleTest = () => {
+    if (!formUrl) {
       toast({
-        title: "No Webhook URL",
-        description: "Please enter and save a webhook URL first",
+        title: "No Form URL",
+        description: "Please enter and save a Google Form URL first",
         variant: "destructive"
       });
       return;
     }
     
     setIsTesting(true);
-    setTestData({ success: false, message: '' });
     
-    try {
-      // Send a test payload to the webhook
-      const testPayload = {
-        test: true,
-        timestamp: new Date().toISOString(),
-        message: "This is a test submission from Málaga Driver Hub"
-      };
-      
-      await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'no-cors', // Required for cross-origin requests to Zapier
-        body: JSON.stringify(testPayload),
-      });
-      
-      // Since we're using no-cors, we won't get a proper response status
-      setTestData({ 
-        success: true, 
-        message: "Test submission sent successfully! Check your Zapier account to confirm it was received." 
-      });
-      
-    } catch (error) {
-      console.error("Error testing webhook:", error);
-      setTestData({ 
-        success: false, 
-        message: "Failed to send test submission. Please verify your webhook URL and try again." 
-      });
-    } finally {
-      setIsTesting(false);
-    }
+    // Open the form URL in a new tab for testing
+    window.open(formUrl, '_blank');
+    
+    setTestData({ 
+      success: true, 
+      message: "The Google Form has been opened in a new tab for testing." 
+    });
+    
+    setIsTesting(false);
   };
   
   return (
@@ -117,9 +93,9 @@ const ZapierConfig = () => {
       <div className="space-y-2">
         <Input
           type="text"
-          value={webhookUrl}
-          onChange={(e) => setWebhookUrl(e.target.value)}
-          placeholder="https://hooks.zapier.com/hooks/catch/..."
+          value={formUrl}
+          onChange={(e) => setFormUrl(e.target.value)}
+          placeholder="https://docs.google.com/forms/d/e/..."
           className="min-w-[300px]"
         />
       </div>
@@ -158,7 +134,7 @@ const ZapierConfig = () => {
         <Button
           variant="secondary"
           onClick={handleTest}
-          disabled={isTesting || !webhookUrl}
+          disabled={isTesting || !formUrl}
         >
           {isTesting ? (
             <>
@@ -166,14 +142,14 @@ const ZapierConfig = () => {
               Testing
             </>
           ) : (
-            'Test Connection'
+            'Test Form'
           )}
         </Button>
         
         <Button 
           variant="outline" 
           onClick={handleClear}
-          disabled={isSaving || isTesting || !webhookUrl}
+          disabled={isSaving || isTesting || !formUrl}
         >
           Clear
         </Button>
@@ -182,4 +158,4 @@ const ZapierConfig = () => {
   );
 };
 
-export default ZapierConfig;
+export default GoogleFormConfig;
