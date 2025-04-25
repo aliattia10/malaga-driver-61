@@ -27,11 +27,11 @@ const TestimonialsSection = () => {
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
-                <span className="text-primary font-bold">JD</span>
+                <span className="text-primary font-bold">JC</span>
               </div>
               <div>
-                <h4 className="font-semibold">John Doe</h4>
-                <p className="text-sm text-muted-foreground">London, UK</p>
+                <h4 className="font-semibold">Juan Carlos Rodríguez</h4>
+                <p className="text-sm text-muted-foreground">Madrid, España</p>
               </div>
             </div>
             <div className="mb-4">
@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "Excellent service from Málaga Driver Hub! Our driver was punctual, professional, and made our airport transfer stress-free. Highly recommended!"
+              "Excelente servicio de Málaga Driver Hub. Nuestro conductor fue puntual, profesional y nos hizo el traslado al aeropuerto completamente sin estrés. Altamente recomendado."
             </p>
           </motion.div>
           
@@ -67,11 +67,11 @@ const TestimonialsSection = () => {
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
-                <span className="text-primary font-bold">MS</span>
+                <span className="text-primary font-bold">MA</span>
               </div>
               <div>
-                <h4 className="font-semibold">Maria Smith</h4>
-                <p className="text-sm text-muted-foreground">Berlin, Germany</p>
+                <h4 className="font-semibold">María Ángeles López</h4>
+                <p className="text-sm text-muted-foreground">Barcelona, España</p>
               </div>
             </div>
             <div className="mb-4">
@@ -94,7 +94,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "We booked a day trip to Granada and our driver was knowledgeable and friendly. The vehicle was comfortable and the entire experience was perfect."
+              "Contratamos un viaje de un día a Granada y nuestro conductor fue muy conocedor y amigable. El vehículo era cómodo y toda la experiencia fue perfecta."
             </p>
           </motion.div>
           
@@ -107,11 +107,11 @@ const TestimonialsSection = () => {
           >
             <div className="flex items-center mb-4">
               <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center mr-4">
-                <span className="text-primary font-bold">RJ</span>
+                <span className="text-primary font-bold">RG</span>
               </div>
               <div>
-                <h4 className="font-semibold">Robert Johnson</h4>
-                <p className="text-sm text-muted-foreground">New York, USA</p>
+                <h4 className="font-semibold">Rafael García Martínez</h4>
+                <p className="text-sm text-muted-foreground">Sevilla, España</p>
               </div>
             </div>
             <div className="mb-4">
@@ -134,7 +134,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "Used Málaga Driver Hub for our corporate event transportation. The service was impeccable, drivers were professional, and everything ran on schedule."
+              "Utilizamos Málaga Driver Hub para el transporte de nuestro evento corporativo. El servicio fue impecable, los conductores fueron profesionales y todo se desarrolló según lo previsto."
             </p>
           </motion.div>
         </div>
