@@ -1,9 +1,9 @@
 
 import { Button } from '@/components/ui/button';
-import GoogleSheetsConfig from '@/components/GoogleSheetsConfig';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ArrowLeft } from 'lucide-react';
+import ZapierConfig from '@/components/ZapierConfig';
 
 const AdminSettings = () => {
   const navigate = useNavigate();
@@ -38,12 +38,12 @@ const AdminSettings = () => {
               <div className="space-y-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 border rounded-lg">
                   <div>
-                    <h3 className="font-medium">Google Sheets</h3>
+                    <h3 className="font-medium">Zapier Integration</h3>
                     <p className="text-sm text-muted-foreground">
-                      Connect to Google Sheets to store booking data
+                      Connect to Zapier to handle booking data
                     </p>
                   </div>
-                  <GoogleSheetsConfig />
+                  <ZapierConfig />
                 </div>
               </div>
             </div>
