@@ -1,14 +1,12 @@
-
 import { MessageCircle } from 'lucide-react';
 import { useLanguage } from '@/hooks/useLanguage';
 
 const WhatsAppButton = () => {
   const { t, language } = useLanguage();
   
-  // Get the translated text for the WhatsApp button
   const buttonText = t('whatsapp.contact_now');
   
-  const phoneNumber = "+34620173295"; // Phone number for WhatsApp link
+  const phoneNumber = "+34620173295"; // Updated phone number
   
   return (
     <a

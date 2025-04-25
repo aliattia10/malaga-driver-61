@@ -1,4 +1,3 @@
-
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, AlertCircle, Settings } from 'lucide-react';
@@ -136,7 +135,7 @@ const BookingConfirmation = () => {
           <div className="text-center">
             <p className="mb-4 text-sm text-muted-foreground">
               A confirmation email has been sent to {bookingData.email}. 
-              If you have any questions about your private driver service, please contact us at +34 600 000 000.
+              If you have any questions about your private driver service, please contact us at +34 620 173 295.
             </p>
             <Button onClick={() => navigate('/')} size="lg">
               Return to Home

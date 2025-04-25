@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -88,27 +87,13 @@ const BookingForm = () => {
       email: formData.email,
       phone: formData.phone,
       specialRequests: formData.specialRequests,
-      submittedAt: new Date().toISOString(),
-      customPickupLocation: formData.pickupLocation === 'Custom Location' ? formData.customPickupLocation : '',
-      customDropoffLocation: formData.dropoffLocation === 'Custom Location' ? formData.customDropoffLocation : ''
+      submittedAt: new Date().toISOString()
     };
-    
-    // ***** ADDED THIS LINE FOR DEBUGGING *****
-    console.log("Booking data to be sent:", JSON.stringify(bookingData, null, 2));
-    
+
     // Verify data exists before sending
     if (!bookingData.pickupLocation || !bookingData.dropoffLocation || 
         !bookingData.dateTime || !bookingData.name || 
         !bookingData.email || !bookingData.phone) {
-      
-      console.error("Missing required booking data:", 
-        !bookingData.pickupLocation ? "pickup location is missing" : "",
-        !bookingData.dropoffLocation ? "dropoff location is missing" : "",
-        !bookingData.dateTime ? "date/time is missing" : "",
-        !bookingData.name ? "name is missing" : "",
-        !bookingData.email ? "email is missing" : "",
-        !bookingData.phone ? "phone is missing" : ""
-      );
       
       toast({
         title: "Form Error",
@@ -121,22 +106,21 @@ const BookingForm = () => {
     }
     
     try {
-      const sheetsResult = await GoogleSheetsService.submitBookingToSheet(bookingData);
-      
-      if (!sheetsResult.success) {
-        toast({
-          title: "Note About Your Booking",
-          description: sheetsResult.message || "Your booking has been confirmed, but there was an issue with the Google Sheets integration.",
-          variant: "default",
-        });
-      }
-      
-      navigate('/booking-confirmation', { 
-        state: { 
-          bookingData,
-          submissionStatus: sheetsResult
-        } 
+      const response = await fetch('https://hooks.zapier.com/hooks/catch/22554798/2p3rt3h/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
       });
+
+      if (response.ok) {
+        navigate('/booking-confirmation', { 
+          state: { bookingData } 
+        });
+      } else {
+        throw new Error('Failed to submit booking');
+      }
       
     } catch (error) {
       console.error("Error submitting booking:", error);
