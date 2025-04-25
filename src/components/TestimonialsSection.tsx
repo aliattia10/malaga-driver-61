@@ -54,7 +54,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "Excelente servicio de Málaga Driver Hub. Nuestro conductor fue puntual, profesional y nos hizo el traslado al aeropuerto completamente sin estrés. Altamente recomendado."
+              "Excellent service from Málaga Driver Hub. Our driver was punctual, professional, and made our airport transfer completely stress-free. Highly recommended!"
             </p>
           </motion.div>
           
@@ -94,7 +94,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "Contratamos un viaje de un día a Granada y nuestro conductor fue muy conocedor y amigable. El vehículo era cómodo y toda la experiencia fue perfecta."
+              "We booked a day trip to Granada, and our driver was very knowledgeable and friendly. The vehicle was comfortable, and the entire experience was perfect."
             </p>
           </motion.div>
           
@@ -134,7 +134,7 @@ const TestimonialsSection = () => {
               </div>
             </div>
             <p className="text-muted-foreground">
-              "Utilizamos Málaga Driver Hub para el transporte de nuestro evento corporativo. El servicio fue impecable, los conductores fueron profesionales y todo se desarrolló según lo previsto."
+              "We used Málaga Driver Hub for our corporate event transportation. The service was impeccable, the drivers were professional, and everything went according to plan."
             </p>
           </motion.div>
         </div>
