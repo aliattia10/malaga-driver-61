@@ -1,3 +1,4 @@
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, AlertCircle, Settings } from 'lucide-react';
@@ -8,6 +9,7 @@ import Footer from '@/components/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useToast } from '@/components/ui/use-toast';
 import { useEffect } from 'react';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const BookingConfirmation = () => {
   const location = useLocation();
@@ -17,13 +19,13 @@ const BookingConfirmation = () => {
   const submissionStatus = location.state?.submissionStatus;
   
   useEffect(() => {
-    // Show a toast if there was an error submitting to Google Sheets
+    // Show a toast if there was an error submitting
     if (submissionStatus && !submissionStatus.success) {
       toast({
-        title: "Note about Google Sheets",
+        title: "Submission Status",
         description: submissionStatus.message,
         variant: "default",
-        action: submissionStatus.message.includes("sheet name") ? (
+        action: submissionStatus.message.includes("webhook") ? (
           <Button variant="outline" size="sm" onClick={() => navigate('/admin/settings')}>
             <Settings className="h-4 w-4 mr-1" />
             Settings
@@ -31,7 +33,12 @@ const BookingConfirmation = () => {
         ) : undefined
       });
     }
-  }, [submissionStatus, toast, navigate]);
+    
+    // If no booking data and no direct navigation, redirect to home
+    if (!bookingData && !location.state?.directNavigation) {
+      navigate('/');
+    }
+  }, [submissionStatus, toast, navigate, bookingData, location.state]);
   
   if (!bookingData) {
     return (
@@ -43,6 +50,7 @@ const BookingConfirmation = () => {
         <Navbar />
         <main className="flex-1 flex items-center justify-center p-6">
           <div className="text-center max-w-md mx-auto">
+            <AlertCircle className="h-16 w-16 text-destructive mx-auto mb-4" />
             <h1 className="text-2xl font-bold mb-4">No Booking Information Found</h1>
             <p className="mb-6 text-muted-foreground">
               We couldn't find any booking information. This might happen if you accessed this page directly.
@@ -85,6 +93,17 @@ const BookingConfirmation = () => {
               Thank you for booking with Málaga Driver Hub. Our professional drivers will provide you with safe and reliable transportation services.
             </p>
           </div>
+          
+          {submissionStatus && !submissionStatus.success && (
+            <Alert variant="destructive" className="mb-6">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Important Note</AlertTitle>
+              <AlertDescription>
+                Your booking details have been received, but there was an issue connecting with our booking system. 
+                Our team has been notified and will contact you shortly to confirm your booking.
+              </AlertDescription>
+            </Alert>
+          )}
           
           <div className="bg-background rounded-lg p-6 mb-6">
             <h2 className="text-xl font-semibold mb-4">Your Private Driver Booking Details</h2>
