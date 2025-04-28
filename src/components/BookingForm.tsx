@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -108,14 +109,14 @@ const BookingForm = () => {
     }
     
     try {
-      const googleFormUrl = localStorage.getItem('google_form_url');
+      const googleSheetUrl = localStorage.getItem('google_sheet_url');
       
-      if (!googleFormUrl) {
-        throw new Error("Google Form URL not configured");
+      if (!googleSheetUrl) {
+        throw new Error("Google Sheet URL not configured");
       }
 
-      // Open the Google Form in a new tab
-      window.open(googleFormUrl, '_blank');
+      // Open the Google Sheet in a new tab
+      window.open(googleSheetUrl, '_blank');
       
       // Navigate to confirmation page with the booking data
       navigate('/booking-confirmation', { 

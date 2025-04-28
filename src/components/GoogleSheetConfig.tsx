@@ -6,18 +6,18 @@ import { useToast } from '@/components/ui/use-toast';
 import { Loader2, Check, AlertTriangle } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
-const GoogleFormConfig = () => {
+const GoogleSheetConfig = () => {
   const { toast } = useToast();
-  const [formUrl, setFormUrl] = useState('');
+  const [sheetUrl, setSheetUrl] = useState('');
   const [isSaving, setIsSaving] = useState(false);
   const [testData, setTestData] = useState({ success: false, message: '' });
   const [isTesting, setIsTesting] = useState(false);
   
-  // Load form URL from localStorage on component mount
+  // Load sheet URL from localStorage on component mount
   useEffect(() => {
-    const savedFormUrl = localStorage.getItem('google_form_url');
-    if (savedFormUrl) {
-      setFormUrl(savedFormUrl);
+    const savedSheetUrl = localStorage.getItem('google_sheet_url');
+    if (savedSheetUrl) {
+      setSheetUrl(savedSheetUrl);
     }
   }, []);
   
@@ -26,10 +26,10 @@ const GoogleFormConfig = () => {
     
     try {
       // Validate the URL
-      if (formUrl && !formUrl.includes('docs.google.com/forms')) {
+      if (sheetUrl && !sheetUrl.includes('docs.google.com/spreadsheets')) {
         toast({
-          title: "Invalid Form URL",
-          description: "Please enter a valid Google Form URL",
+          title: "Invalid Sheet URL",
+          description: "Please enter a valid Google Sheets URL",
           variant: "destructive"
         });
         setIsSaving(false);
@@ -37,14 +37,14 @@ const GoogleFormConfig = () => {
       }
       
       // Save to localStorage
-      localStorage.setItem('google_form_url', formUrl);
+      localStorage.setItem('google_sheet_url', sheetUrl);
       
       toast({
         title: "Settings Saved",
-        description: "Your Google Form URL has been saved successfully"
+        description: "Your Google Sheet URL has been saved successfully"
       });
     } catch (error) {
-      console.error("Error saving form URL:", error);
+      console.error("Error saving sheet URL:", error);
       toast({
         title: "Error",
         description: "Failed to save settings",
@@ -56,20 +56,20 @@ const GoogleFormConfig = () => {
   };
   
   const handleClear = () => {
-    localStorage.removeItem('google_form_url');
-    setFormUrl('');
+    localStorage.removeItem('google_sheet_url');
+    setSheetUrl('');
     setTestData({ success: false, message: '' });
     toast({
       title: "Settings Cleared",
-      description: "Your Google Form URL has been cleared"
+      description: "Your Google Sheet URL has been cleared"
     });
   };
   
   const handleTest = () => {
-    if (!formUrl) {
+    if (!sheetUrl) {
       toast({
-        title: "No Form URL",
-        description: "Please enter and save a Google Form URL first",
+        title: "No Sheet URL",
+        description: "Please enter and save a Google Sheet URL first",
         variant: "destructive"
       });
       return;
@@ -77,12 +77,12 @@ const GoogleFormConfig = () => {
     
     setIsTesting(true);
     
-    // Open the form URL in a new tab for testing
-    window.open(formUrl, '_blank');
+    // Open the sheet URL in a new tab for viewing
+    window.open(sheetUrl, '_blank');
     
     setTestData({ 
       success: true, 
-      message: "The Google Form has been opened in a new tab for testing." 
+      message: "The Google Sheet has been opened in a new tab. Note: For security reasons, data will be viewable but writes require proper configuration." 
     });
     
     setIsTesting(false);
@@ -93,9 +93,9 @@ const GoogleFormConfig = () => {
       <div className="space-y-2">
         <Input
           type="text"
-          value={formUrl}
-          onChange={(e) => setFormUrl(e.target.value)}
-          placeholder="https://docs.google.com/forms/d/e/..."
+          value={sheetUrl}
+          onChange={(e) => setSheetUrl(e.target.value)}
+          placeholder="https://docs.google.com/spreadsheets/d/..."
           className="min-w-[300px]"
         />
       </div>
@@ -134,7 +134,7 @@ const GoogleFormConfig = () => {
         <Button
           variant="secondary"
           onClick={handleTest}
-          disabled={isTesting || !formUrl}
+          disabled={isTesting || !sheetUrl}
         >
           {isTesting ? (
             <>
@@ -142,14 +142,14 @@ const GoogleFormConfig = () => {
               Testing
             </>
           ) : (
-            'Test Form'
+            'View Sheet'
           )}
         </Button>
         
         <Button 
           variant="outline" 
           onClick={handleClear}
-          disabled={isSaving || isTesting || !formUrl}
+          disabled={isSaving || isTesting || !sheetUrl}
         >
           Clear
         </Button>
@@ -158,4 +158,4 @@ const GoogleFormConfig = () => {
   );
 };
 
-export default GoogleFormConfig;
+export default GoogleSheetConfig;
