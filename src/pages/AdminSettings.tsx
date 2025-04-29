@@ -2,8 +2,9 @@
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, AlertTriangle } from 'lucide-react';
 import GoogleSheetConfig from '@/components/GoogleSheetConfig';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const AdminSettings = () => {
   const navigate = useNavigate();
@@ -34,6 +35,15 @@ const AdminSettings = () => {
             
             <div className="glass-card rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Integrations</h2>
+              
+              <Alert variant="warning" className="mb-6">
+                <AlertTriangle className="h-4 w-4" />
+                <AlertTitle>Important Setup Required</AlertTitle>
+                <AlertDescription className="text-sm">
+                  To enable form submissions to Google Sheets, you must follow the setup instructions below.
+                  Without proper setup, form submissions will fail with a "Failed to fetch" error.
+                </AlertDescription>
+              </Alert>
               
               <div className="space-y-6">
                 <div className="flex flex-col gap-6 p-4 border rounded-lg">
@@ -75,26 +85,31 @@ const AdminSettings = () => {
     // Append the data
     sheet.appendRow(rowData);
     
-    // Return success response
+    // Return success response with CORS headers
     return ContentService.createTextOutput(JSON.stringify({
       success: true,
       message: 'Data successfully recorded'
-    })).setMimeType(ContentService.MimeType.JSON);
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
     
   } catch (error) {
-    // Return error response
+    // Return error response with CORS headers
     return ContentService.createTextOutput(JSON.stringify({
       success: false,
       message: 'Error: ' + error.toString()
-    })).setMimeType(ContentService.MimeType.JSON);
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeader('Access-Control-Allow-Origin', '*')
+    .setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
+    .setHeader('Access-Control-Allow-Headers', 'Content-Type');
   }
 }
 
-// Allow cross-origin requests
+// Handle preflight CORS requests
 function doOptions(e) {
-  var lock = LockService.getScriptLock();
-  lock.tryLock(10000);
-  
   var headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
@@ -109,16 +124,26 @@ function doOptions(e) {
                     </pre>
                   </div>
                   <div className="mt-4 text-sm">
-                    <p className="font-medium">Setup Instructions:</p>
+                    <p className="font-medium mb-2">Setup Instructions:</p>
                     <ol className="list-decimal list-inside space-y-1 mt-2">
                       <li>In Google Sheets, go to "Extensions" &gt; "Apps Script"</li>
                       <li>Copy and paste the above code</li>
                       <li>Click "Deploy" &gt; "New deployment"</li>
                       <li>Select "Web app" as the type</li>
-                      <li>Set "Execute as" to "Me" and "Who has access" to "Anyone"</li>
-                      <li>Click "Deploy" and copy the Web App URL</li>
-                      <li>Paste the URL in the Web App URL field above</li>
+                      <li><strong className="text-destructive">Set "Execute as" to "Me" (your Google account)</strong></li>
+                      <li><strong className="text-destructive">Set "Who has access" to "Anyone" (VERY IMPORTANT)</strong></li>
+                      <li>Click "Deploy" and authorize the script when prompted</li>
+                      <li>Copy the Web App URL (it should start with https://script.google.com/macros/s/...)</li>
+                      <li>Paste the URL in the Web App URL field above and save</li>
+                      <li>Test the connection to verify everything works</li>
                     </ol>
+                    
+                    <Alert className="mt-4">
+                      <AlertDescription>
+                        After deployment, you may need to open the URL in a browser and accept the permissions prompt.
+                        The first submission might fail, so try submitting a test booking after setup.
+                      </AlertDescription>
+                    </Alert>
                   </div>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Check, AlertTriangle } from 'lucide-react';
+import { Loader2, Check, AlertTriangle, ExternalLink } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const GoogleSheetConfig = () => {
@@ -63,6 +63,9 @@ const GoogleSheetConfig = () => {
         title: "Settings Saved",
         description: "Your Google Sheet integration settings have been saved successfully"
       });
+      
+      // Reset test data since settings were changed
+      setTestData({ success: false, message: '' });
     } catch (error) {
       console.error("Error saving settings:", error);
       toast({
@@ -88,30 +91,44 @@ const GoogleSheetConfig = () => {
   };
   
   const handleTest = () => {
-    if (!sheetUrl) {
-      toast({
-        title: "No Sheet URL",
-        description: "Please enter and save a Google Sheet URL first",
-        variant: "destructive"
-      });
-      return;
-    }
-    
     setIsTesting(true);
+    setTestData({ success: false, message: '' });
     
-    // Open the sheet URL in a new tab for viewing
-    window.open(sheetUrl, '_blank');
-    
-    setTestData({ 
-      success: true, 
-      message: "The Google Sheet has been opened in a new tab. Make sure to set up a Google Apps Script to receive data." 
-    });
-    
-    setIsTesting(false);
+    try {
+      if (!webAppUrl) {
+        setTestData({ 
+          success: false, 
+          message: "Please enter and save a Web App URL first" 
+        });
+        setIsTesting(false);
+        return;
+      }
+      
+      // Open the web app URL in a new tab just to test if it's accessible
+      window.open(webAppUrl, '_blank');
+      
+      // If the sheet URL is available, open it in a new tab for viewing
+      if (sheetUrl) {
+        window.open(sheetUrl, '_blank');
+      }
+      
+      setTestData({ 
+        success: true, 
+        message: "The Google Sheet and Web App URLs have been opened in new tabs. Make sure they are accessible." 
+      });
+    } catch (error) {
+      console.error("Error testing connection:", error);
+      setTestData({ 
+        success: false, 
+        message: error instanceof Error ? error.message : "An error occurred while testing the connection"
+      });
+    } finally {
+      setIsTesting(false);
+    }
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full md:w-auto">
+    <div className="flex flex-col gap-4 w-full">
       <div className="flex space-x-2 mb-2">
         <Button 
           variant={activeTab === 'sheet' ? "default" : "outline"} 
@@ -151,8 +168,8 @@ const GoogleSheetConfig = () => {
             placeholder="https://script.google.com/macros/s/..."
             className="min-w-[300px]"
           />
-          <p className="text-xs text-muted-foreground">
-            URL of your Google Apps Script web app (deployed as web app)
+          <p className="text-xs text-muted-foreground flex items-center gap-1">
+            <span className="text-destructive">*Required</span>: URL of your Google Apps Script web app
           </p>
         </div>
       )}
@@ -191,7 +208,7 @@ const GoogleSheetConfig = () => {
         <Button
           variant="secondary"
           onClick={handleTest}
-          disabled={isTesting || !sheetUrl}
+          disabled={isTesting || !webAppUrl}
         >
           {isTesting ? (
             <>
@@ -199,7 +216,7 @@ const GoogleSheetConfig = () => {
               Testing
             </>
           ) : (
-            'View Sheet'
+            'Test Connection'
           )}
         </Button>
         
@@ -217,10 +234,24 @@ const GoogleSheetConfig = () => {
         <ol className="list-decimal list-inside space-y-2 text-sm">
           <li>Create a Google Sheet with columns matching your form fields (name, email, etc.)</li>
           <li>From the sheet, go to Extensions &gt; Apps Script</li>
-          <li>Add a script to handle form submissions (see template in Admin docs)</li>
-          <li>Deploy as web app (Execute as: Me, Who has access: Anyone)</li>
-          <li>Copy the web app URL and paste it above</li>
+          <li>Add the Google Apps Script code from the template below</li>
+          <li>Click Deploy &gt; New Deployment &gt; Select "Web app"</li>
+          <li>Set "Execute as" to "Me" (your account)</li>
+          <li><strong className="text-destructive">Important:</strong> Set "Who has access" to "Anyone"</li>
+          <li>Click "Deploy" and authorize when prompted</li>
+          <li>Copy the web app URL and paste it above in the "Web App URL" tab</li>
         </ol>
+        
+        <div className="mt-4 text-sm">
+          <a 
+            href="https://script.google.com/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-primary hover:underline"
+          >
+            Go to Google Apps Script <ExternalLink className="ml-1 h-3 w-3" />
+          </a>
+        </div>
       </div>
     </div>
   );
