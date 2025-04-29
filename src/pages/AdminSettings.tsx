@@ -36,10 +36,10 @@ const AdminSettings = () => {
             <div className="glass-card rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Integrations</h2>
               
-              <Alert variant="warning" className="mb-6">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertTitle>Important Setup Required</AlertTitle>
-                <AlertDescription className="text-sm">
+              <Alert className="mb-6 border-amber-500 bg-amber-50 dark:bg-amber-950/20">
+                <AlertTriangle className="h-4 w-4 text-amber-500" />
+                <AlertTitle className="text-amber-600 dark:text-amber-400">Important Setup Required</AlertTitle>
+                <AlertDescription className="text-sm text-amber-600 dark:text-amber-400">
                   To enable form submissions to Google Sheets, you must follow the setup instructions below.
                   Without proper setup, form submissions will fail with a "Failed to fetch" error.
                 </AlertDescription>
