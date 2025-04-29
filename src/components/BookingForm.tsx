@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
@@ -18,12 +17,13 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { Calendar as CalendarIcon, Clock, MapPin, Send, AlertTriangle } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
+import { Calendar as CalendarIcon, Clock, MapPin, Send, AlertTriangle, Loader2 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { submitToGoogleSheet } from '@/utils/googleSheetSubmit';
 
 const locations = [
   "Custom Location",
@@ -109,24 +109,31 @@ const BookingForm = () => {
     }
     
     try {
-      const googleSheetUrl = localStorage.getItem('google_sheet_url');
+      const result = await submitToGoogleSheet(bookingData);
       
-      if (!googleSheetUrl) {
-        throw new Error("Google Sheet URL not configured");
+      if (!result.success) {
+        throw new Error(result.message);
       }
 
-      // Open the Google Sheet in a new tab
-      window.open(googleSheetUrl, '_blank');
+      toast({
+        title: "Booking Submitted",
+        description: "Your booking request has been successfully submitted!",
+      });
       
-      // Navigate to confirmation page with the booking data
       navigate('/booking-confirmation', { 
         state: { bookingData } 
       });
       
     } catch (error) {
       console.error("Error submitting booking:", error);
-      setSubmissionError("There was a problem submitting your booking. Please try again or contact us directly.");
+      setSubmissionError(error instanceof Error ? error.message : "There was a problem submitting your booking. Please try again or contact us directly.");
       setIsSubmitting(false);
+      
+      toast({
+        title: "Submission Failed",
+        description: error instanceof Error ? error.message : "Failed to submit your booking. Please try again later.",
+        variant: "destructive"
+      });
     }
   };
   
