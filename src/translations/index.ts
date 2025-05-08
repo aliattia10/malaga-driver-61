@@ -52,6 +52,7 @@ const translations = {
     pricing: {
       title: "Our Pricing",
       distance_based: "Our prices are based on distance (per kilometer):",
+      minimum_fare: "Minimum fare per trip: 30 € (1 to 3 people)",
       example1: "48 km = 48 € cash",
       example2: "62 km = 62 € cash",
       and_so_on: "And so on...",
@@ -159,7 +160,7 @@ const translations = {
     },
     locations: {
       custom_location: "Ubicación Personalizada",
-      málaga_airport: "Aeropuerto de Málaga",
+      málaga_airport: "Aeropuerto de M��laga",
       málaga_city_center: "Centro de Málaga"
     },
     hero: {
@@ -201,6 +202,7 @@ const translations = {
     pricing: {
       title: "Nuestros Precios",
       distance_based: "Nuestros precios se basan en la distancia (por kilómetro):",
+      minimum_fare: "Tarifa mínima por viaje: 30 € (1 a 3 personas)",
       example1: "48 km = 48 € en efectivo",
       example2: "62 km = 62 € en efectivo",
       and_so_on: "Y así sucesivamente…",

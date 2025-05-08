@@ -2,7 +2,7 @@
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/hooks/useLanguage';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Euro } from "lucide-react";
+import { Euro, AlertCircle } from "lucide-react";
 
 const PricingSection = () => {
   const { t } = useLanguage();
@@ -51,6 +51,18 @@ const PricingSection = () => {
                 <CardTitle className="text-2xl text-center">{t('pricing.distance_based')}</CardTitle>
               </CardHeader>
               <CardContent className="pt-6">
+                {/* Minimum Fare Alert */}
+                <motion.div 
+                  variants={item} 
+                  className="mb-6 bg-yellow-50 border border-yellow-200 rounded-lg p-4 flex items-start gap-3"
+                >
+                  <AlertCircle className="text-yellow-600 h-5 w-5 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="font-bold text-yellow-800 uppercase">LA TARIFA MÍNIMA POR VIAJE: 30 € (1 a 3 personas)</p>
+                    <p className="text-sm text-yellow-700 mt-1">Minimum fare per trip: 30 € (1 to 3 people)</p>
+                  </div>
+                </motion.div>
+                
                 <div className="grid md:grid-cols-2 gap-6">
                   <motion.div variants={container} className="space-y-4">
                     <motion.div variants={item} className="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-gray-100">
