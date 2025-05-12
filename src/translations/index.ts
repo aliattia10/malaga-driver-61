@@ -14,11 +14,11 @@ const translations = {
       málaga_city_center: "Málaga City Center"
     },
     hero: {
-      subtitle: "Professional Private Drivers in Málaga",
-      title_first: "Hire a Professional",
-      title_second: "Private Driver in Málaga",
-      description: "Safe and reliable transportation services with professional drivers, luxury vehicles, and personalized service throughout Málaga and Costa del Sol.",
-      cta: "Book Your Private Driver"
+      subtitle: "Transfers from Málaga, Spain",
+      title_first: "Professional Transfer",
+      title_second: "Services in Málaga",
+      description: "Safe and reliable transfer services with professional drivers, luxury vehicles, and personalized transportation throughout Málaga and Costa del Sol.",
+      cta: "Book Your Transfer Now"
     },
     services: {
       badge: "Our Driver Services",
@@ -85,11 +85,11 @@ const translations = {
       }
     },
     about: {
-      badge: "About Our Driver Services",
-      title: "Premium Transportation Services in Málaga & Costa del Sol",
+      badge: "About Our Transfer Services",
+      title: "Premium Transportation & Transfer Services in Málaga & Costa del Sol",
       description: {
-        first: "Málaga Driver Hub is a premium private driver service dedicated to providing reliable, comfortable, and professional transportation services in Málaga and throughout Costa del Sol.",
-        second: "Founded with a passion for exceptional service, we combine our deep knowledge of the region with a commitment to customer satisfaction. Our team of experienced drivers ensures a smooth and enjoyable journey when you hire a private driver in Málaga.",
+        first: "Málaga Driver Hub is a premium private transfer service dedicated to providing reliable, comfortable, and professional transportation services in Málaga and throughout Costa del Sol.",
+        second: "Founded with a passion for exceptional service, we combine our deep knowledge of the region with a commitment to customer satisfaction. Our team of experienced drivers ensures a smooth and enjoyable journey when you book a private transfer in Málaga.",
         third: "With a fleet of well-maintained vehicles and professional drivers who speak multiple languages, we cater to international visitors and local residents alike. We take pride in our attention to detail and personalized approach to meet each client's unique transportation needs."
       },
       benefits: {
@@ -110,43 +110,43 @@ const translations = {
           description: "We customize our transportation services according to your needs, whether you need airport transfers or a scenic drive."
         }
       },
-      image_caption: "Experience the beautiful coastline and cultural richness of Málaga with professional drivers who truly know the region.",
-      image_alt: "Professional Málaga driver showing tourists local attractions"
+      image_caption: "Experience the beautiful coastline and cultural richness of Málaga with professional transfers that truly know the region.",
+      image_alt: "Professional Málaga transfers showing tourists local attractions"
     },
     footer: {
-      description: "Premium private driver services in Málaga and Costa del Sol. Professional, reliable, and comfortable transportation.",
+      description: "Premium private transfer services in Málaga and Costa del Sol. Professional, reliable, and comfortable transportation.",
       services: "Services",
-      airport_transfers: "Airport Transfers",
-      day_trips: "Day Trips",
-      sightseeing: "Sightseeing Tours",
-      corporate: "Corporate Services",
-      hourly_hire: "Hourly Hire",
-      contact_us: "Contact Us",
+      airport_transfers: "Traslados al Aeropuerto",
+      day_trips: "Excursiones Diarias",
+      sightseeing: "Tours Turísticos",
+      corporate: "Servicios Corporativos",
+      hourly_hire: "Contratación por Horas",
+      contact_us: "Contáctenos",
       address_value: "Av. del Comandante García Morato s/n, Churriana, 29004 Málaga, Andalucía, España",
-      business_hours: "Business Hours",
-      weekdays: "Monday - Friday",
+      business_hours: "Horario de Atención",
+      weekdays: "Lunes - Viernes",
       weekday_hours: "8:00 AM - 8:00 PM",
-      weekends: "Saturday - Sunday",
+      weekends: "Sábado - Domingo",
       weekend_hours: "9:00 AM - 6:00 PM",
-      special_hours: "24/7 service available for pre-booked airport transfers and special requests.",
+      special_hours: "Servicio 24/7 disponible para traslados al aeropuerto pre-reservados y solicitudes especiales.",
       copyright: "© 2023 Málaga Driver Hub. All rights reserved.",
-      terms: "Terms of Service",
-      privacy: "Privacy Policy",
+      terms: "Términos de Servicio",
+      privacy: "Política de Privacidad",
       cookies: "Cookies"
     },
     whatsapp: {
-      message: "Contact us via WhatsApp",
-      contact_now: "Contact us now"
+      message: "Contáctanos por WhatsApp",
+      contact_now: "Contáctanos ahora"
     },
     testimonials: {
-      title: "What Our Clients Say",
-      subtitle: "Hear from our satisfied customers about their experience with Málaga Driver Hub"
+      title: "Lo Que Dicen Nuestros Clientes",
+      subtitle: "Escuche de nuestros clientes satisfechos sobre su experiencia con Málaga Driver Hub"
     },
     cta: {
-      badge: "Book Your Private Driver",
-      title: "Hire a Professional Driver in Málaga Today",
-      description: "Book your premium private driver service now and enjoy safe, reliable transportation with professional drivers throughout Málaga and Costa del Sol",
-      button: "Book Your Private Driver"
+      badge: "Book Your Transfer",
+      title: "Málaga Transfers - Book Today",
+      description: "Book your premium private transfer service now and enjoy safe, reliable transportation with professional drivers throughout Málaga and Costa del Sol",
+      button: "Book Your Transfer"
     }
   },
   es: {
@@ -160,15 +160,15 @@ const translations = {
     },
     locations: {
       custom_location: "Ubicación Personalizada",
-      málaga_airport: "Aeropuerto de M��laga",
+      málaga_airport: "Aeropuerto de Málaga",
       málaga_city_center: "Centro de Málaga"
     },
     hero: {
-      subtitle: "Conductores Privados Profesionales en Málaga",
-      title_first: "Contrate un Conductor",
-      title_second: "Privado Profesional en Málaga",
-      description: "Servicios de transporte seguros y confiables con conductores profesionales, vehículos de lujo y servicio personalizado en toda Málaga y la Costa del Sol.",
-      cta: "Reserve Su Conductor Privado"
+      subtitle: "Traslados desde Málaga, España",
+      title_first: "Servicio de Traslados",
+      title_second: "Profesionales en Málaga",
+      description: "Servicios de traslado seguros y confiables con conductores profesionales, vehículos de lujo y servicio personalizado en toda Málaga y la Costa del Sol.",
+      cta: "Reserve Su Traslado Ahora"
     },
     services: {
       badge: "Nuestros Servicios",
@@ -235,11 +235,11 @@ const translations = {
       }
     },
     about: {
-      badge: "Sobre Nuestros Servicios de Conductor",
-      title: "Servicios de Transporte Premium en Málaga y Costa del Sol",
+      badge: "Sobre Nuestros Servicios de Traslados",
+      title: "Servicios Premium de Traslado y Transporte en Málaga y Costa del Sol",
       description: {
-        first: "Málaga Driver Hub es un servicio premium de conductor privado dedicado a proporcionar servicios de transporte confiables, cómodos y profesionales en Málaga y en toda la Costa del Sol.",
-        second: "Fundado con pasión por el servicio excepcional, combinamos nuestro profundo conocimiento de la región con un compromiso con la satisfacción del cliente. Nuestro equipo de conductores experimentados garantiza un viaje suave y agradable cuando contrata un conductor privado en Málaga.",
+        first: "Málaga Driver Hub es un servicio premium de traslados privados dedicado a proporcionar servicios de transporte confiables, cómodos y profesionales en Málaga y en toda la Costa del Sol.",
+        second: "Fundado con pasión por el servicio excepcional, combinamos nuestro profundo conocimiento de la región con un compromiso con la satisfacción del cliente. Nuestro equipo de conductores experimentados garantiza un viaje suave y agradable cuando reserva un traslado privado en Málaga.",
         third: "Con una flota de vehículos bien mantenidos y conductores profesionales que hablan múltiples idiomas, atendemos tanto a visitantes internacionales como a residentes locales. Nos enorgullecemos de nuestra atención al detalle y enfoque personalizado para satisfacer las necesidades únicas de transporte de cada cliente."
       },
       benefits: {
@@ -260,11 +260,11 @@ const translations = {
           description: "Personalizamos nuestros servicios de transporte de acuerdo con sus necesidades, ya sea que necesite traslados al aeropuerto o un recorrido panorámico."
         }
       },
-      image_caption: "Experimente la hermosa costa y la riqueza cultural de Málaga con conductores profesionales que realmente conocen la región.",
-      image_alt: "Conductor profesional de Málaga mostrando atracciones locales a turistas"
+      image_caption: "Experimente la hermosa costa y la riqueza cultural de Málaga con servicios de traslado profesionales que realmente conocen la región.",
+      image_alt: "Servicio de traslados profesionales en Málaga mostrando atracciones locales a turistas"
     },
     footer: {
-      description: "Servicios premium de conductor privado en Málaga y Costa del Sol. Transporte profesional, confiable y cómodo.",
+      description: "Servicios premium de traslados privados en Málaga y Costa del Sol. Transporte profesional, confiable y cómodo.",
       services: "Servicios",
       airport_transfers: "Traslados al Aeropuerto",
       day_trips: "Excursiones Diarias",
@@ -293,10 +293,10 @@ const translations = {
       subtitle: "Escuche de nuestros clientes satisfechos sobre su experiencia con Málaga Driver Hub"
     },
     cta: {
-      badge: "Reserve Su Conductor Privado",
-      title: "Contrate un Conductor Profesional en Málaga Hoy",
-      description: "Reserve su servicio de conductor privado premium ahora y disfrute de transporte seguro y confiable con conductores profesionales en toda Málaga y la Costa del Sol",
-      button: "Reserve Su Conductor Privado"
+      badge: "Reserve Su Traslado",
+      title: "Traslados Málaga - Reserve Hoy",
+      description: "Reserve su servicio de traslado privado premium ahora y disfrute de transporte seguro y confiable con conductores profesionales en toda Málaga y la Costa del Sol",
+      button: "Reserve Su Traslado"
     }
   }
 };
